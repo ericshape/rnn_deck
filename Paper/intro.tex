@@ -1,0 +1,232 @@
+
+%\epigraph{All human things are subject to decay, and when fate 
+%summons, Monarchs must obey}{\textit{Mac Flecknoe \\ John Dryden}}
+
+%\section{Introduction}
+
+\section{Tweets and Hashtags}
+
+Twitter is an emerging microblog service provider from 2006. It can allow users to post, publish, share and communicate by tweets, which is a 140 characters limited short message. Because of this characters limited feature, the languages in tweets is including a lot of abbreviations and emotion icons. Another important feature is that tweets allow users to use ``@" for reply to specific another users and ``\#" for the self-tagging and self-categories. 
+
+The hashtags in tweets are the words that are preceded by a hash symbol (\#). And there is no space in one hashtag. The hashtags can be used in the beginning, the middle and the end of tweets for the operation of tagging or annotation. In Twitter, if you click the hashtag, it will be linked to the page displaying other tweets that contains the same hashtag on Twitter. Hashtags do not just appear in Twitter. They are also used in Flicker, Pinterest, Instagram, and Facebook. 
+
+Social media users add hashtags in their posts for different goals, including identification label (\#VT or \#Hokie), sentiment label (\#love, \#like, or \#hate), topic label (\#hiking), event label (\#uselection2016) and etc.. Thus, hashtags provide labels for their texts.
+
+\section{Recurrent Neural Network}
+Neural networks is a machine learning approach to map the features of data into an abstract and high-dimensional representation. From 2012, neural network and deep learning models have been successfully applied into different areas of computer vision, speech recognition and natural language processing (NLP) \cite{LeCun2015}. 
+
+Recurrent Neural Network (RNN) is one type of neural network models. RNN model utilizes the sequential information during training process. It processes the same computation for each sequential input, and the output relies on its previous sequential result. In another word, RNN model can be thought as a memory to store the sequential inputs which have been processed earlier.  RNN model has been proved as Turing-complete by Siegelmann et al.\cite{Siegelmann1995} in 1995. It means that just like Turing Machines, any algorithm can be encoded via a RNN model with parameters tuning. 
+
+In NLP research and application area, RNN model has remarkable achievement recently in language modeling (word embedding \cite{Mikolov2013}, sentence embedding \cite{Kiros2015}), machine translation \cite{Sutskever2014}, sentiment analysis \cite{Socher2013}, question answering \cite{Iyyer2014}, and etc.. 
+
+\section{RNN for Hashtag Prediction}
+
+Hashtag can label and classify tweets. It is useful in many scenarios, including tweets search and retrieval \cite{Efron2010}, sentiment analysis \cite{Davidov2010}, and etc.. But, not all the tweets contain hashtag. Based on a survey on a collection of $62,556,331$ tweets, Hong et al. find that there are only about $11\%$ of tweets in their collection contain at least one hashtag \cite{Hong2011a}. So, hashtag prediction for any tweet texts is a necessary task for tweets analysis. 
+
+Hashtag prediction is a multi-class classification task to assign one or several hashtags to the corresponding tweet texts. Hashtag prediction has multiple applications in tweets analysis.  For example, predicted hashtags of tweets would help users to view tweets via different hashtag categories, especially improve the social media journalists to explore tweets efficiently. 
+
+In this thesis, we utilize recurrent neural network (RNN) to train a classification model for hashtag prediction of tweet texts. The model can achieve $51.86\%$ in prediction rate, which is ~2x higher than the traditional Bag-Of-Word (BOW) prediction model.
+
+\section{Hidden States Visual Analytics for RNN}
+
+After training process, RNN models can classify the data in high performance. However, RNN models are black-boxes. Even model creators cannot interpret why their models achieves in high performance. They also do not have hints about what features the model has learned from the data. Thus, except high performance, model creators do not have evidences from model itself to support their decision making.  For example, our RNN hashtag prediction model can achieve $51.86\%$ in prediction rate. But from model itself, we cannot find any evidence to let us understand how the model achieve this high prediction rate. 
+
+Under the hood of RNN models, they have tons of parameters and repeatedly compute non-linear activation functions for large number of their hidden states. Due to these factors, how to interpret and understand RNN model is a challenge work and an active research topic in deep learning area. Few researchers tried to interpret RNN models via studying the changes in hidden states over time \cite{Strobelt2016} \cite{Li2016}, . But they found some interpretable patterns with large noise and interruptions. 
+
+Visual analytics and relevant interaction techniques are potential to aid sensemaking process \cite{Pirolli2005} of RNN models understanding and interpretion. It can support users to find latent patterns of RNN hidden states and reveal them in visual context. However, how to design efficient and usable visual representations of RNN hidden states with necessary interactions to assist sensemaking is still challenging.
+
+\section{Research Questions}
+
+In this thesis, we will explore:
+
+\begin{itemize}
+    \item How to utilize the Recurrent Neural Network (RNN) techniques for tweets analysis, such as hashtag prediction, tweets clustering, and interactive visualization?
+    \item How to use interactive visual analytics techniques to understand RNN models and form hypotheses about RNN hidden states patterns?
+\end{itemize}
+
+
+In order to state them, three key research questions (RQs) are listed as following: 
+
+\subsection{RQ 1: How to build a Recurrent Neural Network (RNN) based tweets visual analytics system?}
+
+\begin{itemize}
+    \item How we can build a RNN model to predict the hashtag of tweets?
+    
+    \item How to design a tweets visualization system with the results from our RNN model? 
+    
+    \item What is the key design trade off among our RNN model, visualization representations, and interactive strategy?
+\end{itemize}
+
+To answer Research Question 1,  firstly, we utilize recurrent neural network (RNN) to train a classification model for hashtag prediction of any texts. Our RNN model can achieve $51.86\%$ in prediction rate, which is ~2x higher than the traditional Bag-Of-Word (BOW) prediction model. Secondly, we built a RNN we designed a rumor tweets visualization system with the sentence embeddings from our RNN model. Thirdly, we will conduct a user study to find the key design trade off among our RNN model, visualization representations, and interactive strategy.
+
+\subsection{RQ 2: How can a visual analytics system be designed to understand RNN models? }
+ 
+ 
+\begin{itemize}
+    \item How can we explore the RNN models hidden states and their parameters in an interactive visual way?
+    \item How to visualize the probability of activation and probability of contribution of RNN hidden states? 
+    \item How to use visualization build the connections between RNN hidden states and inputs/outputs of models? How to answer the typical question, like what information does a RNN model learn and store in its hidden states?
+\end{itemize}
+
+
+The design of our interactive heatmap visualization for RNN hidden states and relevant matrix reordering technique can answer these questions. 
+
+
+%Our design contains the tweet raw data in different columns, NER based clustering visualization, and hashtag clustered based visualization. And these design is to solve the users spend more time and more attention to remember tweets info. And let users have more free time to focus on the relationship and content, not to consume more mental demand for the essential news analysis tasks.  
+
+\subsection{RQ 3: How effective are our visual analytic system designed to support sensemaking process of RNN models understanding? }
+
+\begin{itemize}
+    \item Would our proposed design visualization in RQ2 be able to help users more effectively gain insights about how the black-box RNN model works? 
+    \item How does our proposed RNN hidden states visualization impact users’ understanding and interpretation of RNN model?
+    \item Can users answer what information a RNN model learns and stores in its hidden states via our design?
+    \item Can users find the abstract, sentiment information, concepts of inputs with the hidden states pattern in our visualization design?
+    \item What are the strategies of users to use in our design to find latent patterns and form hypotheses about RNN hidden states?
+    \item Compare to other RNN visualization approaches\cite{Strobelt2016}, what differences can be observed in the users’ workflow, process, and, insight?
+    \item Can our design be deployed on crowdsourcing platform to scale up the sensemaking process of RNN model understanding?
+
+\end{itemize}
+
+Our future user studies could answer Research Question 3 and its sub questions. 
+
+\subsection{Significance}
+
+
+Exploring these research questions above would help researchers build tools with fully leverage of RNN models. It would lead them to gain more insight of RNN models understanding and to build more usable visual analytics system with RNN models. 
+
+%\begin{itemize}
+%  \item Understanding the new types of interaction available will outline the design space for spatial interaction (RQ 1). These interactions will be analyzed in terms of enumerating these interactions, as well as the user’s analytical reasoning associated with each (RQ1). 
+%  
+%  \item RQ 2 explores for what visualization and interaction design have benefits for RNN models understanding. More importantly, the whole process can be interactive so that user can use it for news production (RQ 2). Applying this body of knowledge to a prototype (RumorVis) where the benefits can be observed will provide initial feedback.
+%
+%    \item RQ 3 evaluates the effectiveness of using our prototype design in RNN model understanding and interpreting process. The evaluation results will let researchers know how to make a rumor visual analytics system that can make journalists gain more insights during their news production.
+%    
+%\end{itemize}
+
+
+
+
+
+%------
+%
+%
+%Research Question 2: How to verify this model in a visual way efficiently and effectively. 
+%
+%How the user can understand the RNN model and build the algorithm trust on it. 
+%
+%\begin{itemize}
+%    \item How can we find a visual way to explore the RNN models hidden states and parameters directly? 
+%    \item Can our visual way connect with the hidden states to inputs and outputs which can be understood by human beings. 
+%    \item Can our visual way help users to form hypotheses about RNN hidden state dynamics in their model 
+%\end{itemize}
+%
+%\subsection{RQ2.1 How to observe efficiently the the work process for the black-box RNN model. }
+%
+%- Why the final step embedding cannot work 
+%
+%- We can observe the probability of activation and probability of contribution. Why it can work
+%
+%\subsection{RQ2.2 }
+%
+%- How to observe the probability of activation and probability of contribution. 
+%
+%There are several ways.  
+%
+%- parallel coordinates 
+%
+%Heatmap + matrix reorder is a better way to observe the probability of activation and probability of the cell contribution. 
+%
+%
+%\subsection{RQ2.3} How to let user to label it efficiently. 
+%- expert views of labeling
+%- crowdsourcing view of labeling
+%
+%
+%Research Question 1: How we can use RNN model to predict the hashtag of tweets effectively and efficiently. 
+%
+%
+%RQ1.1 How to use RNN model for tweets hashtag prediction
+%
+%RQ1.2 How the training dataset can change the prediction rate
+%
+%
+%
+%Research Question 3: 
+%
+%How to build a evaluation metrics to evaluate how the model 
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%% need to update the copyright info for this screenshot. 
+%\begin{figure}[tb]
+%\centering
+%  \includegraphics[width=1\columnwidth]{../prelim_doc/figure/Q1_model}
+%  \caption{RQ1 How RNN model works}~\label{fig:RQ1_model}
+%\end{figure}
+%
+%% need to update the copyright info for this screenshot. 
+%\begin{figure}[tb]
+%\centering
+%  \includegraphics[width=1\columnwidth]{../prelim_doc/figure/Q1_1}
+%  \caption{RQ1. 2 How large and data size is enough for train to use}~\label{fig:RQ1_1}
+%\end{figure}
+%
+%
+%\subsection{RQ1.3}
+%
+%
+%% need to update the copyright info for this screenshot. 
+%\begin{figure}[tb]
+%\centering
+%  \includegraphics[width=1\columnwidth]{../prelim_doc/figure/Q1_2}
+%  \caption{RQ1-2 How the predict result will decay along time }~\label{fig:RQ1_2}
+%\end{figure}
+%
+%
+%\subsection{RQ1.4}
+%
+%% need to update the copyright info for this screenshot. 
+%\begin{figure}[tb]
+%\centering
+%  \includegraphics[width=1\columnwidth]{../prelim_doc/figure/Q1_3}
+%  \caption{RQ1-2 How to use online learning to increase predict rate. }~\label{fig:RQ1_3}
+%\end{figure}
+%
+%%Nowadays, while the approaches, like the machine learning rumor detection \cite{Liu2015} \cite{Zhao2015a} and crowdsourcing determining information credibility \cite{Mitra2015},  provide good prediction results to identify rumors and misinformation.
+%%In order to support sensemaking for users, these approaches have to be able to interact with users in a proper way and let users to interpret their process and understand their predictions. 
+%%Interactive visual analytics is a prospective bridge to fill this gap.  Several previous works, such as \cite{DeDomenico2013} \cite{Finn2014} \cite{Resnick2014} \cite{Zhao2014}  and \cite{Zhao2015a}, use simple visualization to show their results.   
+%%
+%%However, it is still a challenge work to design a rumor visual analytics system to support sense-making and gain insights. At the same time, this system should also be intractable, interpretable, efficient, and usable for the rumor analytics tasks. 
+%%
+%%Overall, the goal of this paper are 
+%%\begin{itemize}
+%%  \item How to enable people to get the insight and hint from the visualization of the character dependency network using a combination of automated and interactive visual methods?
+%%  
+%%  \item How to design a rumor visual analytics system, how this type of design would influence users' sense-making process, and how users can gain more insights from this design. 
+%%
+%%\end{itemize}
+%
+%% need to update the copyright info for this screenshot. 
+%\begin{figure}[tb]
+%\centering
+%  \includegraphics[width=1\columnwidth]{../prelim_doc/figure/Q2_1}
+%  \caption{RQ2 How to verify this RNN model efficiently and effectively.  }~\label{fig:RQ2_1}
+%\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
