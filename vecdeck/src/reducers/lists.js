@@ -5,6 +5,7 @@ import {
   GET_LISTS_START,
   MOVE_CARD,
   MOVE_LIST,
+  ADD_LIST,
   TOGGLE_DRAGGING
 } from '../actions/lists';
 
@@ -43,6 +44,19 @@ export default function lists(state = initialState, action) {
       });
     }
     case MOVE_LIST: {
+
+      console.log("In reducers/lists.js");
+      const newLists = [...state.lists];
+      const { lastX, nextX } = action;
+      const t = newLists.splice(lastX, 1)[0];
+
+      newLists.splice(nextX, 0, t);
+
+      return state.withMutations((ctx) => {
+        ctx.set('lists', newLists);
+      });
+    }
+    case ADD_LIST: {
       const newLists = [...state.lists];
       const { lastX, nextX } = action;
       const t = newLists.splice(lastX, 1)[0];
