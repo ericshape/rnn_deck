@@ -33,6 +33,7 @@ export default class Board extends Component {
     super(props);
     this.moveCard = this.moveCard.bind(this);
     this.moveList = this.moveList.bind(this);
+    this.addList = this.addList.bind(this);
     this.findList = this.findList.bind(this);
     this.scrollRight = this.scrollRight.bind(this);
     this.scrollLeft = this.scrollLeft.bind(this);
@@ -83,8 +84,17 @@ export default class Board extends Component {
   }
 
   moveList(listId, nextX) {
+    console.log("In board.js");
     const { lastX } = this.findList(listId);
+    console.log(lastX);
     this.props.moveList(lastX, nextX);
+  }
+
+  addList(listId){
+
+    const { lastX } = this.findList(listId);
+    this.props.addList(lastX);
+
   }
 
   findList(id) {
@@ -110,6 +120,7 @@ export default class Board extends Component {
             item={item}
             moveCard={this.moveCard}
             moveList={this.moveList}
+            addList={this.addList}
             startScrolling={this.startScrolling}
             stopScrolling={this.stopScrolling}
             isScrolling={this.state.isScrolling}

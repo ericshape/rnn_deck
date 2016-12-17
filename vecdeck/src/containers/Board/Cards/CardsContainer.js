@@ -36,10 +36,14 @@ const listTarget = {
     const { id: listId } = monitor.getItem();
     const { id: nextX } = props;
     if (listId !== nextX) {
+      console.log("in CardsContainer.js");
       props.moveList(listId, props.x);
     }
   }
 };
+
+
+
 
 @DropTarget('list', listTarget, connectDragSource => ({
   connectDropTarget: connectDragSource.dropTarget(),
@@ -66,11 +70,38 @@ export default class CardsContainer extends Component {
     const { connectDropTarget, connectDragSource, item, x, moveCard, isDragging } = this.props;
     const opacity = isDragging ? 0.5 : 1;
 
+
     return connectDragSource(connectDropTarget(
       <div className="desk" style={{ opacity }}>
         <div className="desk-head">
-          <div className="desk-name">{item.name}</div>
+          <div className="desk-name">
+            {item.name}
+            {/*<button>Copy</button>*/}
+            {/*<image alt="Delete" resource="www.baidu.com/image"></image>*/}
+          </div>
+
+            {/*var Button = React.createClass({*/}
+            {/*render: function() {*/}
+            {/*return <button type="button" onClick={this.onClick}>Click me</button>*/}
+            {/*},*/}
+
+            {/*onClick: function(ev) {*/}
+              {/*alert('the button was clicked');*/}
+            {/*}*/}
+            {/*});*/}
+
+            <input type="text" value='Search'></input>
+            <button>Copy</button>
+            <button>Delete</button>
         </div>
+
+        {/*<form action="#">*/}
+          {/*First name: <input type="text" name="fname"><br>*/}
+          {/*Last name: <input type="text" name="lname"><br>*/}
+          {/*<input type="submit" value="Submit">*/}
+        {/*// </form>*/}
+
+        <br/>
         <Cards
           moveCard={moveCard}
           x={x}
