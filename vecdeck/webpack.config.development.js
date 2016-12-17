@@ -45,7 +45,8 @@ module.exports = {
   node: {
     net: 'empty',
     tls: 'empty',
-    dns: 'empty'
+    dns: 'empty',
+    fs: 'empty'
   }
 };
 /* eslint-enable global-require, react/jsx-first-prop-new-line */
