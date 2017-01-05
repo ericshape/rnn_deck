@@ -8,6 +8,7 @@ import * as ListsActions from '../../actions/lists';
 
 import CardsContainer from './Cards/CardsContainer';
 import CustomDragLayer from './CustomDragLayer';
+import SearchBar from './SearchBar';
 
 function mapStateToProps(state) {
   return {
@@ -34,6 +35,7 @@ export default class Board extends Component {
     this.moveCard = this.moveCard.bind(this);
     this.moveList = this.moveList.bind(this);
     this.addList = this.addList.bind(this);
+    this.searchList = this.searchList.bind(this);
     this.findList = this.findList.bind(this);
     this.scrollRight = this.scrollRight.bind(this);
     this.scrollLeft = this.scrollLeft.bind(this);
@@ -97,6 +99,14 @@ export default class Board extends Component {
 
   }
 
+  searchList(listId, searchString){
+
+    console.log(listId, searchString);
+    // change "hello world" into real input.
+    this.props.searchList(listId, searchString);
+  }
+
+
   findList(id) {
     const { lists } = this.props;
     const list = lists.filter(l => l.id === id)[0];
@@ -113,11 +123,14 @@ export default class Board extends Component {
     return (
       <div style={{ height: '100%' }}>
         <CustomDragLayer snapToGrid={false} />
+        {/*<SearchBar />*/}
+
         {lists.map((item, i) =>
           <CardsContainer
             key={item.id}
             id={item.id}
             item={item}
+            searchList={this.searchList}
             moveCard={this.moveCard}
             moveList={this.moveList}
             addList={this.addList}
