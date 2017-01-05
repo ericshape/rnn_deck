@@ -2,6 +2,13 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config.development');
 
+
+let mongoose = require('mongoose');
+mongoose.connect('mongodb://aurora.cs.vt.edu:27017/TwitterRumor');
+
+require('./actions/tweet.js');
+
+
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
 new WebpackDevServer(webpack(config), {
@@ -14,3 +21,5 @@ new WebpackDevServer(webpack(config), {
   }
   console.log('Listening at http://localhost:3000/');
 });
+
+
