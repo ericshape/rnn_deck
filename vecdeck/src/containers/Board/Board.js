@@ -36,6 +36,8 @@ export default class Board extends Component {
     this.moveList = this.moveList.bind(this);
     this.addList = this.addList.bind(this);
     this.searchList = this.searchList.bind(this);
+    this.copyList = this.copyList.bind(this);
+    this.deleteList = this.deleteList.bind(this);
     this.findList = this.findList.bind(this);
     this.scrollRight = this.scrollRight.bind(this);
     this.scrollLeft = this.scrollLeft.bind(this);
@@ -101,9 +103,24 @@ export default class Board extends Component {
 
   searchList(listId, searchString){
 
-    console.log(listId, searchString);
+    console.log(listId);
     // change "hello world" into real input.
     this.props.searchList(listId, searchString);
+  }
+
+  copyList(listId){
+
+    console.log(listId);
+    // change "hello world" into real input.
+    this.props.copyList(listId);
+  }
+
+
+  deleteList(listId){
+
+    console.log(listId);
+    // change "hello world" into real input.
+    this.props.deleteList(listId);
   }
 
 
@@ -123,7 +140,6 @@ export default class Board extends Component {
     return (
       <div style={{ height: '100%' }}>
         <CustomDragLayer snapToGrid={false} />
-        {/*<SearchBar />*/}
 
         {lists.map((item, i) =>
           <CardsContainer
@@ -131,6 +147,8 @@ export default class Board extends Component {
             id={item.id}
             item={item}
             searchList={this.searchList}
+            copyList={this.copyList}
+            deleteList={this.deleteList}
             moveCard={this.moveCard}
             moveList={this.moveList}
             addList={this.addList}

@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {DropTarget, DragSource} from 'react-dnd';
+import {Button, ButtonToolbar, Dropdown, MenuItem} from 'react-bootstrap'
+// import Button from 'react-bootstrap/lib/Button'
 
 import Cards from './Cards';
 import SearchBar from '../SearchBar';
@@ -60,6 +62,8 @@ export default class CardsContainer extends Component {
     moveCard: PropTypes.func.isRequired,
     moveList: PropTypes.func.isRequired,
     searchList: PropTypes.func.isRequired,
+    copyList: PropTypes.func.isRequired,
+    deleteList: PropTypes.func.isRequired,
     isDragging: PropTypes.bool,
     startScrolling: PropTypes.func,
     stopScrolling: PropTypes.func,
@@ -67,35 +71,63 @@ export default class CardsContainer extends Component {
   };
 
 
-
-  searchList(event){
-      // change "hello world" into real input.
-      // const { lastX } = this.findList(listId);
-      let listId = this.props.item.id;
-      this.props.searchList(listId, event.target.value);
-  }
-
-
-
+  // searchList(event) {
+  //   // change "hello world" into real input.
+  //   // const { lastX } = this.findList(listId);
+  //   let listId = this.props.item.id;
+  //   this.props.searchList(listId, event.target.value);
+  // }
+  //
+  // copyList(){
+  //   let listId = this.props.item.id;
+  //   console.log("listId: " + listId);
+  //   this.props.copyList(listId);
+  // }
+  //
+  // deleteList(){
+  //   let listId = this.props.item.id;
+  //   this.props.deleteList(listId);
+  // }
+  //
 
   render() {
     const {connectDropTarget, connectDragSource, item, x, moveCard, isDragging} = this.props;
     const opacity = isDragging ? 0.5 : 1;
 
 
-
     return connectDragSource(connectDropTarget(
       <div className="desk" style={{opacity}}>
         <div className="desk-head">
           <div className="desk-name">
-            {item.name}
+            ListID: {item.id}
+            {/*<ButtonToolbar>*/}
+           <Button bsStyle="danger" bsSize="xsmall" style={{float: 'right', margin: '0px 1px 1px 1px'}}
+                    onClick={()=>{
+                      let listId = this.props.item.id;
+                      this.props.deleteList(listId);
+                    }}>Delete</Button>
+
+                        <Button bsStyle="primary" bsSize="xsmall" style={{float: 'right', margin: '0px 1px 1px 1px'}}
+                    onClick={()=>{
+                      let listId = this.props.item.id;
+                      this.props.copyList(listId);
+                    }}>Copy</Button>
+
+            {/*</ButtonToolbar>*/}
           </div>
 
-          <SearchBar searchList={(event)=>{
+
+          <div>Topic things</div>
+        {/*<br />*/}
+          <SearchBar searchList={(event) => {
             let listId = this.props.item.id;
-            this.props.searchList(listId,event.target.value);
+            this.props.searchList(listId, event.target.value);
           }}/>
+
+
         </div>
+
+        {/*<br/>*/}
 
         <Cards
           moveCard={moveCard}

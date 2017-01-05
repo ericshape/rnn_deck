@@ -7,6 +7,8 @@ import {
   MOVE_LIST,
   ADD_LIST,
   SEARCH_LIST,
+  COPY_LIST,
+  DELETE_LIST,
   TOGGLE_DRAGGING
 } from '../actions/lists';
 
@@ -87,7 +89,7 @@ export default function lists(state = initialState, action) {
         // this reduces the item list step by ste
         searchTerms.forEach(function (term) {
           if (term && term.length) {
-            if (tweet.text.includes(term) || tweet.user.name.includes(term) || tweet.user.screen_name.includes(term)) {
+            if (tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase())) {
               searched = true;
             }
           }
@@ -100,6 +102,46 @@ export default function lists(state = initialState, action) {
         ctx.set('lists', newLists);
       });
     }
+
+    case COPY_LIST: {
+
+      const newLists = [...state.lists];
+      const {listId} = action;
+      let len = newLists.length;
+      console.log("-------listId---------------");
+      console.log(listId);
+      let cards = JSON.parse(JSON.stringify(newLists[listId].cards));
+      newLists.push({
+        id: len,
+        // name: faker.commerce.productName(),
+        cards: cards
+      });
+      console.log(newLists);
+
+      return state.withMutations((ctx) => {
+        ctx.set('lists', newLists);
+      });
+
+
+    }
+
+    case DELETE_LIST: {
+      const newLists = [...state.lists];
+      const {listId} = action;
+
+      newLists.splice(listId, 1);
+
+      newLists.forEach((list, i)=>{
+        list.id = i;
+      });
+
+
+      return state.withMutations((ctx) => {
+        ctx.set('lists', newLists);
+      });
+    }
+
+
     case TOGGLE_DRAGGING: {
       return state.set('isDragging', action.isDragging);
     }

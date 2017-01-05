@@ -10,7 +10,7 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <Form inline>
+      <Form inline style={{margin: '8px 3px 1px 1px'}}>
         <FormGroup controlId="formInlineName">
           <ControlLabel>Search: </ControlLabel>
           {' '}

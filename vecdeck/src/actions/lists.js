@@ -7,6 +7,8 @@ export const MOVE_CARD = 'MOVE_CARD';
 export const MOVE_LIST = 'MOVE_LIST';
 export const ADD_LIST = 'ADD_LIST';
 export const SEARCH_LIST = 'SEARCH_LIST';
+export const COPY_LIST = 'COPY_LIST';
+export const DELETE_LIST = 'DELETE_LIST';
 export const TOGGLE_DRAGGING = 'TOGGLE_DRAGGING';
 
 let tweets = [
@@ -1252,6 +1254,21 @@ export function searchList(listId, searchString){
   console.log("searchList");
   return (dispatch) => {
     dispatch({type: SEARCH_LIST, listId, searchString});
+  }
+}
+
+
+export function copyList(listId){
+  console.log("copyList");
+  return (dispatch) => {
+    dispatch({type: COPY_LIST, listId});
+  }
+}
+
+export function deleteList(listId){
+  console.log("deleteList");
+  return (dispatch) => {
+    dispatch({type: DELETE_LIST, listId});
   }
 }
 
