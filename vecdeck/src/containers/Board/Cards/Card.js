@@ -14,16 +14,17 @@ const Card = (props) => {
 
   return (
     <div style={style} className="item" id={style ? item.id : null}>
-      <div className="item-name">{item.title}</div>
+      <div className="item-name">{item.user.screen_name}</div>
       <div className="item-container">
         {/*<div className="item-avatar-wrap">*/}
           {/*<img src={`https://randomuser.me/api/portraits/med/men/${item.id}.jpg`} alt="" />*/}
         {/*</div>*/}
         <div className="item-content">
-          <div className="item-author">{`${item.firstName} ${item.lastName}`}</div>
+          {/*<div className="item-author">{`${item.firstName} ${item.lastName}`}</div>*/}
+          <div className="item-author">{`${item.user.name}`}</div>
           {/*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, banditos.dasfdsaf dasf dslf jdasl kfjladsj fldsajfljadsljfn ldsjflkdsafjkldasfjldsafjk</p>*/}
           {/*<p>{item.html_text}</p>*/}
-          <div>{`${item.html_text}`}</div>
+          <div>{`${item.text}`}</div>
         </div>
       </div>
       <div className="item-perfomers">
