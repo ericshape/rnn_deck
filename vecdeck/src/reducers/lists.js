@@ -83,14 +83,14 @@ export default function lists(state = initialState, action) {
           return true;
         }
 
-        let searched = false;
+        let searched = true;
         // split search text on space
         // let searchTerms = searchString.split(' ');
         // search for single terms.
         // this reduces the item list step by ste
         tags.forEach(function (term) {
-            if (tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase())) {
-              searched = true;
+            if (!(tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase()))) {
+              searched = false;
             }
         });
 

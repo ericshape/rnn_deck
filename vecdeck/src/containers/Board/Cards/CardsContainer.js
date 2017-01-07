@@ -113,23 +113,21 @@ export default class CardsContainer extends Component {
 
           <ReactTags tags={tags}
                      suggestions={item.suggestions}
-                     handleDelete={() => {
+                     handleDelete={(i) => {
                        let listId = this.props.item.id;
-                       let tags = this.state.tags;
+                       let tags = this.props.item.tags;
                        tags.splice(i, 1);
                        this.props.searchList(listId, tags);
                      }}
                      handleAddition={(tag) => {
-                       console.log("---------TAGS---------")
                        let listId = this.props.item.id;
                        let tags = this.props.item.tags;
-                       console.log(tags);
                        tags.push({id: tags.length + 1, text: tag});
                        this.props.searchList(listId, tags);
                      }}
                      handleDrag={(tag, currPos, newPos) => {
                        let listId = this.props.item.id;
-                       let tags = this.state.tags;
+                       let tags = this.props.item.tags;
                        // mutate array
                        tags.splice(currPos, 1);
                        tags.splice(newPos, 0, tag);
