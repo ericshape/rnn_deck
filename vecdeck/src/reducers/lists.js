@@ -145,6 +145,8 @@ export default function lists(state = initialState, action) {
       let cards = JSON.parse(JSON.stringify(newLists[listId].cards));
       newLists.push({
         id: len,
+        tags: newLists[listId].tags,
+        suggestions: newLists[listId].suggestions,
         // name: faker.commerce.productName(),
         cards: cards
       });
