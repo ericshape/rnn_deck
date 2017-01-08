@@ -89,7 +89,8 @@ export default function lists(state = initialState, action) {
         // search for single terms.
         // this reduces the item list step by ste
         tags.forEach(function (term) {
-            if (!(tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase()))) {
+            if (!(tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase()))) {
+              // if (!(tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase()))) {
               searched = false;
             }
         });

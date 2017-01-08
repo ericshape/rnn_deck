@@ -6,6 +6,8 @@ import {Button, ButtonToolbar, Dropdown, MenuItem} from 'react-bootstrap'
 import Cards from './Cards';
 // import SearchBar from '../SearchBar';
 import {WithOutContext as ReactTags} from 'react-tag-input';
+import TagsInput from 'react-tagsinput';
+// import 'react-tagsinput/react-tagsinput.css';
 
 
 const listSource = {
@@ -86,24 +88,20 @@ export default class CardsContainer extends Component {
           <div className="desk-name">
             ListID: {item.id}
             {/*<ButtonToolbar>*/}
-            <Button bsStyle="danger" bsSize="xsmall" style={{float: 'right', margin: '0px 1px 1px 1px'}}
+            <Button bsStyle="danger" bsSize="xsmall" style={{float: 'right', margin: '3px 3px 3px 3px'}}
                     onClick={() => {
                       let listId = this.props.item.id;
                       this.props.deleteList(listId);
                     }}>Delete</Button>
 
-            <Button bsStyle="primary" bsSize="xsmall" style={{float: 'right', margin: '0px 1px 1px 1px'}}
+            <Button bsStyle="primary" bsSize="xsmall" style={{float: 'right', margin: '3px 3px 3px 3px'}}
                     onClick={() => {
                       let listId = this.props.item.id;
                       this.props.copyList(listId);
                     }}>Copy</Button>
 
-            {/*</ButtonToolbar>*/}
           </div>
 
-
-          {/*<div>Topic things</div>*/}
-          {/*<br />*/}
 
           {/*<SearchBar searchList={(event) => {*/}
           {/*let listId = this.props.item.id;*/}
@@ -111,31 +109,41 @@ export default class CardsContainer extends Component {
           {/*}}/>*/}
 
 
-          <ReactTags tags={tags}
-                     suggestions={item.suggestions}
-                     handleDelete={(i) => {
-                       let listId = this.props.item.id;
-                       let tags = this.props.item.tags;
-                       tags.splice(i, 1);
-                       this.props.searchList(listId, tags);
-                     }}
-                     handleAddition={(tag) => {
-                       let listId = this.props.item.id;
-                       let tags = this.props.item.tags;
-                       tags.push({id: tags.length + 1, text: tag});
-                       this.props.searchList(listId, tags);
-                     }}
-                     handleDrag={(tag, currPos, newPos) => {
-                       let listId = this.props.item.id;
-                       let tags = this.props.item.tags;
-                       // mutate array
-                       tags.splice(currPos, 1);
-                       tags.splice(newPos, 0, tag);
+          {/*<div>*/}
+          {/*<ReactTags  ref={item.id} tags={tags}*/}
+                      {/*autofocus={false}*/}
+                     {/*suggestions={item.suggestions}*/}
+                     {/*handleDelete={(i) => {*/}
+                       {/*/!*this.refs["" + item.id].focus();*!/*/}
+                       {/*let listId = this.props.item.id;*/}
+                       {/*let tags = this.props.item.tags;*/}
+                       {/*tags.splice(i, 1);*/}
+                       {/*this.props.searchList(listId, tags);*/}
+                     {/*}}*/}
+                     {/*handleAddition={(tag) => {*/}
+                       {/*let listId = this.props.item.id;*/}
+                       {/*let tags = this.props.item.tags;*/}
+                       {/*tags.push({id: tags.length + 1, text: tag});*/}
+                       {/*this.props.searchList(listId, tags);*/}
+                     {/*}}*/}
+                     {/*handleDrag={(tag, currPos, newPos) => {*/}
+                       {/*let listId = this.props.item.id;*/}
+                       {/*let tags = this.props.item.tags;*/}
+                       {/*// mutate array*/}
+                       {/*tags.splice(currPos, 1);*/}
+                       {/*tags.splice(newPos, 0, tag);*/}
 
-                       // re-render
-                       this.props.searchList(listId, tags);
-                     }}/>
+                       {/*// re-render*/}
+                       {/*this.props.searchList(listId, tags);*/}
+                     {/*}}/>*/}
+          {/*</div>*/}
 
+
+          <TagsInput value={tags} onChange={(tags) =>{
+            let listId = this.props.item.id;
+            console.log(tags);
+            this.props.searchList(listId, tags);
+          }} />
         </div>
 
         {/*<br/>*/}
