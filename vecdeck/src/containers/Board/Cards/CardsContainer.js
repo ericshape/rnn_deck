@@ -73,6 +73,7 @@ export default class CardsContainer extends Component {
     isScrolling: PropTypes.bool,
 
     searchList: PropTypes.func.isRequired,
+    star: PropTypes.func.isRequired
   };
 
   render() {
@@ -118,6 +119,10 @@ export default class CardsContainer extends Component {
           startScrolling={this.props.startScrolling}
           stopScrolling={this.props.stopScrolling}
           isScrolling={this.props.isScrolling}
+          star={(cardId)=>{
+            let listId = this.props.item.id;
+            return this.props.star(listId, cardId);
+          }}
         />
       </div>
     ));

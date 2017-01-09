@@ -9,6 +9,7 @@ import {
   SEARCH_LIST,
   COPY_LIST,
   DELETE_LIST,
+  STAR_CARD,
   TOGGLE_DRAGGING
 } from '../actions/lists';
 
@@ -89,10 +90,10 @@ export default function lists(state = initialState, action) {
         // search for single terms.
         // this reduces the item list step by ste
         tags.forEach(function (term) {
-            if (!(tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase()))) {
-              // if (!(tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase()))) {
-              searched = false;
-            }
+          if (!(tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase()))) {
+            // if (!(tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase()))) {
+            searched = false;
+          }
         });
 
         return searched;
@@ -156,8 +157,6 @@ export default function lists(state = initialState, action) {
       return state.withMutations((ctx) => {
         ctx.set('lists', newLists);
       });
-
-
     }
 
     case DELETE_LIST: {
@@ -166,9 +165,21 @@ export default function lists(state = initialState, action) {
 
       newLists.splice(listId, 1);
 
-      newLists.forEach((list, i)=>{
+      newLists.forEach((list, i) => {
         list.id = i;
       });
+
+      return state.withMutations((ctx) => {
+        ctx.set('lists', newLists);
+      });
+    }
+
+    case STAR_CARD: {
+      const newLists = [...state.lists];
+      const {listId, cardId} = action;
+      console.log(listId, cardId);
+      newLists[listId].cards[cardId].star = !newLists[listId].cards[cardId].star;
+      console.log(newLists[listId].cards[cardId].star);
 
 
       return state.withMutations((ctx) => {

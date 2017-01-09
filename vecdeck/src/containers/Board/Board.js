@@ -35,15 +35,19 @@ export default class Board extends Component {
     this.moveCard = this.moveCard.bind(this);
     this.moveList = this.moveList.bind(this);
     this.addList = this.addList.bind(this);
-    this.searchList = this.searchList.bind(this);
-    this.copyList = this.copyList.bind(this);
-    this.deleteList = this.deleteList.bind(this);
+
+
     this.findList = this.findList.bind(this);
     this.scrollRight = this.scrollRight.bind(this);
     this.scrollLeft = this.scrollLeft.bind(this);
     this.stopScrolling = this.stopScrolling.bind(this);
     this.startScrolling = this.startScrolling.bind(this);
     this.state = { isScrolling: false };
+
+    this.searchList = this.searchList.bind(this);
+    this.copyList = this.copyList.bind(this);
+    this.deleteList = this.deleteList.bind(this);
+    this.star = this.star.bind(this);
   }
 
   componentWillMount() {
@@ -125,6 +129,11 @@ export default class Board extends Component {
   }
 
 
+  star(listId, cardId){
+    this.props.star(listId, cardId);
+  }
+
+
   findList(id) {
     const { lists } = this.props;
     const list = lists.filter(l => l.id === id)[0];
@@ -134,6 +143,7 @@ export default class Board extends Component {
       lastX: lists.indexOf(list)
     };
   }
+
 
   render() {
     const { lists } = this.props;
@@ -158,6 +168,7 @@ export default class Board extends Component {
             x={i}
 
             searchList={this.searchList}
+            star={this.star}
           />
         )}
       </div>
