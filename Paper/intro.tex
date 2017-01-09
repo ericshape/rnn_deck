@@ -200,6 +200,49 @@ rnn会对vector做incremental的修改
 
 \section{Proposed Evaluation}
 
+We will conduct a controlled user study in Virginia Tech. This section will introduce the research questions we would explore and detail information about our participants, experimental setting, and the study methodology we would deploy. 
+
+We will conduct a controlled experiment to evaluate the effectiveness of predicted hashtags and tweet embedding from RNN model for the tweets news discovery task.    
+
+We will compare the TwitterDeck like app with predicted hashtags and tweet embedding from RNN model to the other normal TwitterDeck like app without RNN model support.  
+
+We  will recruit the undergraduate students from Department of Communication, Virginia Tech for this study. We suppose the participants would have experience with news discovery and news article writing with social media.
+
+\subsection{Compared Techniques}
+
+We will compare four different techniques in our study:
+
+\begin{itemize}
+  \item \textbf{TwitterDeck Like App (T)} is implemented with the basic keywords search and tweets drag-and-drop functions of TwitterDeck. This widely adopted technique will be served as a baseline condition in our study. 
+  
+  \item \textbf{TwitterDeck Like App with Predicted Hashtag only (H)} adds the predicted hashtag from RNN model for each tweets in TwitterDeck Like App. Users can organize tweets via the predicted hashtags in different columns.   
+
+  \item \textbf{TwitterDeck Like App with Tweet Embedding only (E)} plugs the tweet embedding from RNN model to each tweets in TwitterDeck Like App. In this technique, users can 
+  
+  \item \textbf{TwitterDeck Like App with both Predicted Hashtags and Tweet Embedding (T\&E)}
+  
+\end{itemize}
+
+
+Visual links (L) are  routed, straight lines that visually elements highlighted as in technique H. Connection lines are according to the algorithm given in Section 6.3. However, the base representation is not taken into account for links routing.
+
+Context-preserving visual links (CL) use our algorithm, which  the optimization criteria, as proposed in Section 4.
+
+The top row of images in Figure 10 shows an example of the three highlighting techniques applied to the same base representation. The appearance adjustments described in Section 5, were applied to all three techniques if the highlight regions were evaluated as subjectively to perceive in a pilot study.
+
+\subsection{Tasks}
+
+\subsection{Apparatus}
+
+\subsection{Design and Procedure}
+
+\subsection{Hypotheses}
+
+\subsection{Results}
+
+
+\subsection{Research Questions}
+
 In this paper, the goal we want to evaluate are two things:
 
 \subsection{Predicted Hashtags By RNN}
@@ -217,6 +260,25 @@ Will the vector space search feature can help users
     \includegraphics[width= 1.1 \columnwidth]{images/user_study_plan}
    \caption{The UI view of vector deck for organizing tweets.  } ~\label{fig: vector_deck}
 \end{figure}
+
+
+\subsection{Proposed Study Methodology}
+
+
+
+\section{Evaluation Results}
+
+
+\section{Contributions}
+
+The first contribution of this paper is to use the RNN model to predict the hashtag and generate RNN based tweet embedding to support the vector space model. These two highlight spots 
+
+We utilize recurrent neural network (RNN) to train a classification model for hashtag prediction of any texts. Our RNN model can achieve $51.86\%$ in prediction rate, which is ~2x higher than the traditional Bag-Of-Word (BOW) prediction model. Secondly, we built a RNN we designed a rumor tweets visualization system with the sentence embeddings from our RNN model. 
+
+
+The second contribution is that we conducted a controlled experiment that compared the use of four different techniques to support typical tweets news discovery tasks of social media journalists: simple twitter deck like approach,  approach with predicted hashtag only, approach with tweet embedding search only,  and approach with both predicted hashtags and tweet embedding search.
+
+We expect the results of this experiment would show that predicted hashtags and tweet embedding search from RNN model could improve performance on tasks for social media news discovery related mounts of tweets. We also expect the results would show that the approach with both predicted hashtags and tweet embedding search is the most effective of the four techniques we tested.
 
 
 
