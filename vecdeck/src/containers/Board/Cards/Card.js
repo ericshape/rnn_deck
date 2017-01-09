@@ -69,7 +69,8 @@ export default class Card extends Component {
         <div className="item-container">
           <div className="item-content">
             <div className="item-author">{`${item.user.name}`}</div>
-            <div>{`${item.text}`}</div>
+            {/*<div>{`${item.text}`}</div>*/}
+            <div dangerouslySetInnerHTML={ { __html: item.html_text } }></div>
             {/*<div>{item.text}</div>*/}
           </div>
         </div>
