@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 
 const propTypes = {
   item: PropTypes.object.isRequired,
@@ -16,47 +17,18 @@ const Card = (props) => {
     <div style={style} className="item" id={style ? item.id : null}>
       <div className="item-name">{item.user.screen_name}</div>
       <div className="item-container">
-        {/*<div className="item-avatar-wrap">*/}
-          {/*<img src={`https://randomuser.me/api/portraits/med/men/${item.id}.jpg`} alt="" />*/}
-        {/*</div>*/}
         <div className="item-content">
-          {/*<div className="item-author">{`${item.firstName} ${item.lastName}`}</div>*/}
           <div className="item-author">{`${item.user.name}`}</div>
-          {/*<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, banditos.dasfdsaf dasf dslf jdasl kfjladsj fldsajfljadsljfn ldsjflkdsafjkldasfjldsafjk</p>*/}
-          {/*<p>{item.html_text}</p>*/}
           <div>{`${item.text}`}</div>
         </div>
       </div>
       <div className="item-perfomers">
         <div className="add-perfomers">
-          <a href="#"><img src={galPng} alt="Add perfomers" /></a>
-          <div className="perfomer">
-            <img
-              src={`https://randomuser.me/api/portraits/thumb/men/${item.id + 1}.jpg`}
-              alt="Perfomer"
-            />
-          </div>
-          <div className="perfomer">
-            <img
-              src={`https://randomuser.me/api/portraits/thumb/men/${item.id + 2}.jpg`}
-              alt="Perfomer"
-            />
-          </div>
-          <div className="perfomer">
-            <img
-              src={`https://randomuser.me/api/portraits/thumb/men/${item.id + 3}.jpg`}
-              alt="Perfomer"
-            />
-          </div>
+          {/*<Glyphicon glyph="star" />*/}
+          <Glyphicon glyph="star-empty" />
         </div>
         <div className="delete-perfomers">
-          <a href="#"><img src={delPng} alt="Delete perfomers" /></a>
-          <div className="perfomer">
-            <img
-              src={`https://randomuser.me/api/portraits/thumb/men/${item.id + 4}.jpg`}
-              alt="Perfomer"
-            />
-          </div>
+          <Glyphicon glyph="remove"/>
         </div>
       </div>
     </div>
