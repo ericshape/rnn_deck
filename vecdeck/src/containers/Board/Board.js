@@ -101,11 +101,12 @@ export default class Board extends Component {
 
   }
 
-  searchList(listId, searchString){
+  searchList(listId, tags){
 
     console.log(listId);
     // change "hello world" into real input.
-    this.props.searchList(listId, searchString);
+    // this.props.searchList(listId, searchString);
+    this.props.searchList(listId, tags);
   }
 
   copyList(listId){
@@ -146,7 +147,6 @@ export default class Board extends Component {
             key={item.id}
             id={item.id}
             item={item}
-            searchList={this.searchList}
             copyList={this.copyList}
             deleteList={this.deleteList}
             moveCard={this.moveCard}
@@ -156,6 +156,8 @@ export default class Board extends Component {
             stopScrolling={this.stopScrolling}
             isScrolling={this.state.isScrolling}
             x={i}
+
+            searchList={this.searchList}
           />
         )}
       </div>

@@ -74,25 +74,25 @@ export default function lists(state = initialState, action) {
     }
     case SEARCH_LIST: {
       const newLists = [...state.lists];
-      const {listId, searchString} = action;
+      const {listId, tags} = action;
 
+      newLists[listId].tags = tags;
       newLists[listId].cards = state.tweets.filter(function (tweet) {
-        console.log('------------------------------');
-        if (!searchString || searchString.length === 0) {
+
+        if (tags.length == 0) {
           return true;
         }
 
-        let searched = false;
+        let searched = true;
         // split search text on space
-        let searchTerms = searchString.split(' ');
+        // let searchTerms = searchString.split(' ');
         // search for single terms.
         // this reduces the item list step by ste
-        searchTerms.forEach(function (term) {
-          if (term && term.length) {
-            if (tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase())) {
-              searched = true;
+        tags.forEach(function (term) {
+            if (!(tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase()))) {
+              // if (!(tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase()))) {
+              searched = false;
             }
-          }
         });
 
         return searched;
@@ -102,6 +102,39 @@ export default function lists(state = initialState, action) {
         ctx.set('lists', newLists);
       });
     }
+
+    //
+    //     case SEARCH_LIST: {
+    //   const newLists = [...state.lists];
+    //   const {listId, searchString} = action;
+    //
+    //   newLists[listId].cards = state.tweets.filter(function (tweet) {
+    //     console.log('------------------------------');
+    //     if (!searchString || searchString.length === 0) {
+    //       return true;
+    //     }
+    //
+    //     let searched = false;
+    //     // split search text on space
+    //     let searchTerms = searchString.split(' ');
+    //     // search for single terms.
+    //     // this reduces the item list step by ste
+    //     searchTerms.forEach(function (term) {
+    //       if (term && term.length) {
+    //         if (tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase())) {
+    //           searched = true;
+    //         }
+    //       }
+    //     });
+    //
+    //     return searched;
+    //   });
+    //
+    //   return state.withMutations((ctx) => {
+    //     ctx.set('lists', newLists);
+    //   });
+    // }
+
 
     case COPY_LIST: {
 
@@ -113,6 +146,8 @@ export default function lists(state = initialState, action) {
       let cards = JSON.parse(JSON.stringify(newLists[listId].cards));
       newLists.push({
         id: len,
+        tags: newLists[listId].tags,
+        suggestions: newLists[listId].suggestions,
         // name: faker.commerce.productName(),
         cards: cards
       });

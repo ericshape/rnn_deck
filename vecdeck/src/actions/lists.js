@@ -1213,19 +1213,18 @@ export function getLists(quantity) {
     d.name = d.screen_name;
   });
 
-  // console.log(Hello);
-  // console.log(Immutable.fromJS(tweetsData));
-  // let tweets = Immutable.fromJS(tweetsData);
-  // console.log(tweets);
 
   let lists = [];
 
   lists.push({
     id: 0,
     name: faker.commerce.productName(),
+    tags: [],
+    suggestions: [],
     cards: JSON.parse(JSON.stringify(tweets))
   });
 
+  console.log("list------------------------");
   console.log(lists);
 
   return (dispatch) => {
@@ -1250,10 +1249,11 @@ export function moveCard(lastX, lastY, nextX, nextY) {
   };
 }
 
-export function searchList(listId, searchString){
+export function searchList(listId, tags){
   console.log("searchList");
   return (dispatch) => {
-    dispatch({type: SEARCH_LIST, listId, searchString});
+    // dispatch({type: SEARCH_LIST, listId, searchString});
+    dispatch({type: SEARCH_LIST, listId, tags});
   }
 }
 
