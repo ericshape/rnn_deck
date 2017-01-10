@@ -24,6 +24,13 @@ const InitialState = Record({
 const initialState = new InitialState;
 
 
+// reorder an array based on ID
+function reorder(arr){
+  arr.sort((a, b)=>{
+    return a.id-b.id;
+  })
+}
+
 export default function lists(state = initialState, action) {
   switch (action.type) {
     case GET_LISTS_START:
@@ -177,11 +184,16 @@ export default function lists(state = initialState, action) {
     case STAR_CARD: {
       const newLists = [...state.lists];
       const {listId, cardId} = action;
-      console.log(listId, cardId);
-      newLists[listId].cards[cardId].star = !newLists[listId].cards[cardId].star;
-      console.log(newLists[listId].cards[cardId].star);
+
+      let selectedList = newLists[listId].cards;
+      console.log(selectedList);
+      selectedList[cardId].id *= -1;
+      selectedList[cardId].star = !selectedList[cardId].star;
+
+      reorder(selectedList);
 
 
+      // console.log(newLists);
       return state.withMutations((ctx) => {
         ctx.set('lists', newLists);
       });
