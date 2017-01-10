@@ -31,6 +31,15 @@ function reorder(arr){
   })
 }
 
+
+function highlight(newLists, listId, cardId){
+newLists.forEach((list, i)=>{
+  if(listId != i){
+    list.cards[cardId].highlight = true;
+  }
+});
+}
+
 export default function lists(state = initialState, action) {
   switch (action.type) {
     case GET_LISTS_START:
@@ -190,8 +199,10 @@ export default function lists(state = initialState, action) {
       selectedList[cardId].id *= -1;
       selectedList[cardId].star = !selectedList[cardId].star;
 
-      reorder(selectedList);
+      selectedList[cardId].highlight = !selectedList[cardId].highlight;
 
+      reorder(selectedList);
+      highlight(newLists, listId, cardId);
 
       // console.log(newLists);
       return state.withMutations((ctx) => {

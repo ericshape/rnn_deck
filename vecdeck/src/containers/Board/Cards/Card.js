@@ -16,9 +16,14 @@ export default class Card extends Component {
       glyph = 'star';
     }
 
+    // let background = {background: 'white'};
+    if(item.highlight){
+      style.background = '#ffffb3';
+    }
+
     return (
 
-      <div style={style} className="item" id={style ? item.id : null}>
+       <div style={style} className="item" id={style ? item.id : null}>
         <div className="item-name">{`${item.user.screen_name}`}</div>
         <div className="item-container">
           <div className="item-content">
