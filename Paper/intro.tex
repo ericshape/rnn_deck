@@ -195,44 +195,48 @@ rnn会对vector做incremental的修改
 
 
 
-\section{Proposed Solution}
+\section{User Interface Design}
 
 
-\section{Proposed Evaluation}
 
-We will conduct a controlled user study in Virginia Tech. This section will introduce the research questions we would explore and detail information about our participants, experimental setting, and the study methodology we would deploy. 
+
+\section{User Study}
+
+This section will introduce the research questions we would explore and detail information about our participants, experimental setting, and the study methodology we would deploy. 
 
 We will conduct a controlled experiment to evaluate the effectiveness of predicted hashtags and tweet embedding from RNN model for the tweets news discovery task.    
 
-We will compare the TwitterDeck like app with predicted hashtags and tweet embedding from RNN model to the other normal TwitterDeck like app without RNN model support.  
+Our study would compare the TwitterDeck like app with predicted hashtags and tweet embedding from RNN model to the other normal TwitterDeck like app without RNN model support.  
 
-We  will recruit the undergraduate students from Department of Communication, Virginia Tech for this study. We suppose the participants would have experience with news discovery and news article writing with social media.
+In this study, we will recruit the undergraduate students from Department of Communication, Virginia Tech for this study. We suppose the participants would have experience with news discovery and news article writing with social media.
 
 \subsection{Compared Techniques}
 
 We will compare four different techniques in our study:
 
 \begin{itemize}
-  \item \textbf{TwitterDeck Like App (T)} is implemented with the basic keywords search and tweets drag-and-drop functions of TwitterDeck. This widely adopted technique will be served as a baseline condition in our study. 
+  \item \textbf{TwitterDeck Like App (T)} is implemented with the basic keywords search and tweets drag-and-drop functions of TwitterDeck. Similar with the keywords search normally, the keywords search in this technique is to match keywords exactly in the text of tweets. This widely adopted technique will be served as a baseline condition in our study. 
   
-  \item \textbf{TwitterDeck Like App with Predicted Hashtag only (H)} adds the predicted hashtag from RNN model for each tweets in TwitterDeck Like App. Users can organize tweets via the predicted hashtags in different columns.   
+  \item \textbf{TwitterDeck Like App with Predicted Hashtag only (H)} adds the predicted hashtag from RNN model for each tweets in TwitterDeck Like App. Users can organize tweets via the predicted hashtags in different columns. At the same time, users can also apply all the functions in the \textbf{TwitterDeck Like App (T)} above. The detail of hashtag predictions from RNN model has been introduced in Section 3. 
 
-  \item \textbf{TwitterDeck Like App with Tweet Embedding only (E)} plugs the tweet embedding from RNN model to each tweets in TwitterDeck Like App. In this technique, users can 
+  \item \textbf{TwitterDeck Like App with Tweet Embedding only (E)} plugs the tweet embedding from RNN model to each tweets in TwitterDeck Like App. In this technique, users can search the keywords for the relevant tweets in vector space. In this technique, we believe users would reach more relevant tweets without exactly matching in keywords. For the detail of tweet embedding from RNN model and search in vector space model, we have discussed in Section 3.   
   
-  \item \textbf{TwitterDeck Like App with both Predicted Hashtags and Tweet Embedding (T\&E)}
+  \item \textbf{TwitterDeck Like App with both Predicted Hashtags and Tweet Embedding (H\&E)} is the combination of third \textbf{H} and fourth \textbf{E} techniques. Users would organize and search tweets with the ultimate supports from RNN model. 
   
 \end{itemize}
 
+The Figure 5 shows an user interface example of the four different techniques applied to the same tweets data. 
 
-Visual links (L) are  routed, straight lines that visually elements highlighted as in technique H. Connection lines are according to the algorithm given in Section 6.3. However, the base representation is not taken into account for links routing.
+\subsection{Tasks and Apparatus}
 
-Context-preserving visual links (CL) use our algorithm, which  the optimization criteria, as proposed in Section 4.
+Users would be asked to perform a news discovery task from tweets data and user interface techniques we provided. In the typical news discovery process, users would look for 
 
-The top row of images in Figure 10 shows an example of the three highlighting techniques applied to the same base representation. The appearance adjustments described in Section 5, were applied to all three techniques if the highlight regions were evaluated as subjectively to perceive in a pilot study.
 
-\subsection{Tasks}
 
-\subsection{Apparatus}
+Users were asked to perform a modiﬁed visual search task. In a con- ventional visual search task, the user looks for a speciﬁc target item within multiple distractors; a single instance of the target is usually present in about 50\% of the presented images [30]. In our experi- ment, users were required to identify multiple targets within complex images that were visually enhanced by one of the highlighting tech- niques described above. This task represents a typical visual search task of knowledge workers, who need to scan related elements in mul- tiple views or items related to their current selection in a single visual- ization. To assess whether users identiﬁed all the highlighted elements in the image, we asked them to count as accurately and quickly as possible the number of elements found. Users were instructed that accuracy was considered more important than task completion time.
+
+Because we did not wish to limit our technique to a single sce- nario, we presented users with 16 different use case images for each technique. These images included scatterplot matrices, biochemical pathways, satellite images, and treemaps as well as multiple appli- cation windows containing text, images, and maps (Figure 10). In addition, we varied the number of highlighted elements across these images from 5 to 12, with two occurrences each.
+
 
 \subsection{Design and Procedure}
 
