@@ -9,6 +9,7 @@ import {
   SEARCH_LIST,
   COPY_LIST,
   DELETE_LIST,
+  STAR_CARD,
   TOGGLE_DRAGGING
 } from '../actions/lists';
 
@@ -22,6 +23,22 @@ const InitialState = Record({
 /* eslint-enable new-cap */
 const initialState = new InitialState;
 
+
+// reorder an array based on ID
+function reorder(arr){
+  arr.sort((a, b)=>{
+    return a.id-b.id;
+  })
+}
+
+
+function highlight(newLists, listId, cardId){
+newLists.forEach((list, i)=>{
+  if(listId != i){
+    list.cards[cardId].highlight = true;
+  }
+});
+}
 
 export default function lists(state = initialState, action) {
   switch (action.type) {
@@ -89,10 +106,10 @@ export default function lists(state = initialState, action) {
         // search for single terms.
         // this reduces the item list step by ste
         tags.forEach(function (term) {
-            if (!(tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase()))) {
-              // if (!(tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase()))) {
-              searched = false;
-            }
+          if (!(tweet.text.toLowerCase().includes(term.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.toLowerCase()))) {
+            // if (!(tweet.text.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.name.toLowerCase().includes(term.text.toLowerCase()) || tweet.user.screen_name.toLowerCase().includes(term.text.toLowerCase()))) {
+            searched = false;
+          }
         });
 
         return searched;
@@ -156,8 +173,6 @@ export default function lists(state = initialState, action) {
       return state.withMutations((ctx) => {
         ctx.set('lists', newLists);
       });
-
-
     }
 
     case DELETE_LIST: {
@@ -166,11 +181,30 @@ export default function lists(state = initialState, action) {
 
       newLists.splice(listId, 1);
 
-      newLists.forEach((list, i)=>{
+      newLists.forEach((list, i) => {
         list.id = i;
       });
 
+      return state.withMutations((ctx) => {
+        ctx.set('lists', newLists);
+      });
+    }
 
+    case STAR_CARD: {
+      const newLists = [...state.lists];
+      const {listId, cardId} = action;
+
+      let selectedList = newLists[listId].cards;
+      console.log(selectedList);
+      selectedList[cardId].id *= -1;
+      selectedList[cardId].star = !selectedList[cardId].star;
+
+      selectedList[cardId].highlight = !selectedList[cardId].highlight;
+
+      reorder(selectedList);
+      highlight(newLists, listId, cardId);
+
+      // console.log(newLists);
       return state.withMutations((ctx) => {
         ctx.set('lists', newLists);
       });

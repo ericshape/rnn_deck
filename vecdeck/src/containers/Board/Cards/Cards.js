@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { DropTarget } from 'react-dnd';
-import { findDOMNode } from 'react-dom';
+import React, {Component, PropTypes} from 'react';
+import {DropTarget} from 'react-dnd';
+import {findDOMNode} from 'react-dom';
 
 import Card from './DraggableCard';
 
@@ -30,7 +30,7 @@ function getPlaceholderIndex(y, scrollY) {
 const specs = {
   drop(props, monitor, component) {
     document.getElementById(monitor.getItem().id).style.display = 'block';
-    const { placeholderIndex } = component.state;
+    const {placeholderIndex} = component.state;
     const lastX = monitor.getItem().x;
     const lastY = monitor.getItem().y;
     const nextX = props.x;
@@ -46,7 +46,7 @@ const specs = {
     }
 
     if ((lastX === nextX && lastY === nextY) ||
-    (lastX === nextX && nextY + 1 === lastY) || nextY === -1) {
+      (lastX === nextX && nextY + 1 === lastY) || nextY === -1) {
       return;
     }
 
@@ -69,7 +69,7 @@ const specs = {
       }
     } else {
       if (window.innerWidth - monitor.getClientOffset().x > 200 &&
-          monitor.getClientOffset().x > 200
+        monitor.getClientOffset().x > 200
       ) {
         props.stopScrolling();
       }
@@ -81,7 +81,7 @@ const specs = {
     // user moves the mouse, we do this awful hack and set the state (!!)
     // on the component from here outside the component.
     // https://github.com/gaearon/react-dnd/issues/179
-    component.setState({ placeholderIndex });
+    component.setState({placeholderIndex});
 
     // when drag begins, we hide the card and only display cardDragPreview
     const item = monitor.getItem();
@@ -107,7 +107,8 @@ export default class Cards extends Component {
     canDrop: PropTypes.bool,
     startScrolling: PropTypes.func,
     stopScrolling: PropTypes.func,
-    isScrolling: PropTypes.bool
+    isScrolling: PropTypes.bool,
+    star: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -119,8 +120,8 @@ export default class Cards extends Component {
   }
 
   render() {
-    const { connectDropTarget, x, cards, isOver, canDrop } = this.props;
-    const { placeholderIndex } = this.state;
+    const {connectDropTarget, x, cards, isOver, canDrop} = this.props;
+    const {placeholderIndex} = this.state;
 
     let toPlaceFirst;
     let toPlaceLast;
@@ -129,14 +130,15 @@ export default class Cards extends Component {
       toPlaceFirst = false;
       if (isOver && canDrop && i === 0 && placeholderIndex === -1) {
         toPlaceFirst = true;
-        cardList.push(<div key="placeholder" className="item placeholder" />);
+        cardList.push(<div key="placeholder" className="item placeholder"/>);
       }
       if (item !== undefined) {
         cardList.push(
           <Card x={x} y={i}
-            item={item}
-            key={item.id}
-            stopScrolling={this.props.stopScrolling}
+                item={item}
+                key={item.id}
+                stopScrolling={this.props.stopScrolling}
+                star={this.props.star}
           />
         );
       }
@@ -146,19 +148,19 @@ export default class Cards extends Component {
         if (!toPlaceFirst && placeholderIndex > i) {
           toPlaceLast = true;
         } else if (!toPlaceFirst && !toPlaceLast && placeholderIndex === i) {
-          cardList.push(<div key="placeholder" className="item placeholder" />);
+          cardList.push(<div key="placeholder" className="item placeholder"/>);
         }
       }
     });
 
     // if placeholder index is greater than array.length, display placeholder as last
     if (toPlaceLast) {
-      cardList.push(<div key="placeholder" className="item placeholder" />);
+      cardList.push(<div key="placeholder" className="item placeholder"/>);
     }
 
     // if there is no items in cards currently, display a placeholder anyway
     if (isOver && canDrop && cards.length === 0) {
-      cardList.push(<div key="placeholder" className="item placeholder" />);
+      cardList.push(<div key="placeholder" className="item placeholder"/>);
     }
 
     return connectDropTarget(

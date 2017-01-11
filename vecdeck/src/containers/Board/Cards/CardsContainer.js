@@ -73,6 +73,7 @@ export default class CardsContainer extends Component {
     isScrolling: PropTypes.bool,
 
     searchList: PropTypes.func.isRequired,
+    star: PropTypes.func.isRequired
   };
 
   render() {
@@ -102,43 +103,6 @@ export default class CardsContainer extends Component {
 
           </div>
 
-
-          {/*<SearchBar searchList={(event) => {*/}
-          {/*let listId = this.props.item.id;*/}
-          {/*this.props.searchList(listId, event.target.value);*/}
-          {/*}}/>*/}
-
-
-          {/*<div>*/}
-          {/*<ReactTags  ref={item.id} tags={tags}*/}
-                      {/*autofocus={false}*/}
-                     {/*suggestions={item.suggestions}*/}
-                     {/*handleDelete={(i) => {*/}
-                       {/*/!*this.refs["" + item.id].focus();*!/*/}
-                       {/*let listId = this.props.item.id;*/}
-                       {/*let tags = this.props.item.tags;*/}
-                       {/*tags.splice(i, 1);*/}
-                       {/*this.props.searchList(listId, tags);*/}
-                     {/*}}*/}
-                     {/*handleAddition={(tag) => {*/}
-                       {/*let listId = this.props.item.id;*/}
-                       {/*let tags = this.props.item.tags;*/}
-                       {/*tags.push({id: tags.length + 1, text: tag});*/}
-                       {/*this.props.searchList(listId, tags);*/}
-                     {/*}}*/}
-                     {/*handleDrag={(tag, currPos, newPos) => {*/}
-                       {/*let listId = this.props.item.id;*/}
-                       {/*let tags = this.props.item.tags;*/}
-                       {/*// mutate array*/}
-                       {/*tags.splice(currPos, 1);*/}
-                       {/*tags.splice(newPos, 0, tag);*/}
-
-                       {/*// re-render*/}
-                       {/*this.props.searchList(listId, tags);*/}
-                     {/*}}/>*/}
-          {/*</div>*/}
-
-
           <TagsInput value={tags} onChange={(tags) =>{
             let listId = this.props.item.id;
             console.log(tags);
@@ -155,6 +119,10 @@ export default class CardsContainer extends Component {
           startScrolling={this.props.startScrolling}
           stopScrolling={this.props.stopScrolling}
           isScrolling={this.props.isScrolling}
+          star={(cardId)=>{
+            let listId = this.props.item.id;
+            return this.props.star(listId, cardId);
+          }}
         />
       </div>
     ));

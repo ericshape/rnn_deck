@@ -10,6 +10,7 @@ export const SEARCH_LIST = 'SEARCH_LIST';
 export const COPY_LIST = 'COPY_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const TOGGLE_DRAGGING = 'TOGGLE_DRAGGING';
+export const STAR_CARD = 'STAR_CARD';
 
 let tweets = [
   {
@@ -1211,6 +1212,8 @@ export function getLists(quantity) {
     d.lastName = "world";
     d.title = "this is a tile";
     d.name = d.screen_name;
+    d.star = false;
+    d.highlight = false;
   });
 
 
@@ -1272,6 +1275,11 @@ export function deleteList(listId){
   }
 }
 
+export function star(listId, cardId) {
+  return (dispatch) => {
+    dispatch({type: STAR_CARD, listId, cardId});
+  }
+}
 
 export function toggleDragging(isDragging) {
   console.log("toggleDragging");
