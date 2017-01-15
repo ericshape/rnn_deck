@@ -80,7 +80,6 @@ export default class CardsContainer extends Component {
     const {connectDropTarget, connectDragSource, item, x, moveCard, isDragging} = this.props;
     const opacity = isDragging ? 0.5 : 1;
 
-
     let tags = item.tags;
 
     return connectDragSource(connectDropTarget(
@@ -105,7 +104,6 @@ export default class CardsContainer extends Component {
 
           <TagsInput value={tags} onChange={(tags) =>{
             let listId = this.props.item.id;
-            console.log(tags);
             this.props.searchList(listId, tags);
           }} />
         </div>

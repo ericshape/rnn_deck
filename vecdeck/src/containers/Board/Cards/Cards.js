@@ -58,7 +58,6 @@ const specs = {
       monitor.getClientOffset().y,
       findDOMNode(component).scrollTop
     );
-    // console.log(placeholderIndex);
 
     // horizontal scroll
     if (!props.isScrolling) {
@@ -120,8 +119,10 @@ export default class Cards extends Component {
   }
 
   render() {
+
     const {connectDropTarget, x, cards, isOver, canDrop} = this.props;
     const {placeholderIndex} = this.state;
+
 
     let toPlaceFirst;
     let toPlaceLast;
@@ -134,7 +135,8 @@ export default class Cards extends Component {
       }
       if (item !== undefined) {
         cardList.push(
-          <Card x={x} y={i}
+          <Card
+                x={x} y={i}
                 item={item}
                 key={item.id}
                 stopScrolling={this.props.stopScrolling}
@@ -143,6 +145,7 @@ export default class Cards extends Component {
         );
       }
 
+      {/*isStar={item.state}*/}
       if (isOver && canDrop) {
         toPlaceLast = false;
         if (!toPlaceFirst && placeholderIndex > i) {
@@ -163,7 +166,8 @@ export default class Cards extends Component {
       cardList.push(<div key="placeholder" className="item placeholder"/>);
     }
 
-    return connectDropTarget(
+    // return connectDropTarget(
+    return (
       <div className="desk-items">
         {cardList}
       </div>

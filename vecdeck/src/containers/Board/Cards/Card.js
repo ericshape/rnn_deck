@@ -1,75 +1,51 @@
 import React, {Component, PropTypes} from 'react';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 
+
 export default class Card extends Component {
 
-  constructor() {
-  super()
-  this.state = {glyph: 'star-empty'}
+  constructor(props) {
+    super(props);
+  }
+
+  static propTypes = {
+    item: PropTypes.object.isRequired,
+    style: PropTypes.object,
+    star: PropTypes.func.isRequired,
+    y: PropTypes.number,
   }
 
   render() {
-
-    const { style, item, star } = this.props;
+    const {style, item, star, isHighlighted} = this.props;
     let glyph = 'star-empty';
-    if(item.star){
+    if (item.star) {
       glyph = 'star';
+      style.background = '#ffffb3';
     }
-
-    // let background = {background: 'white'};
-    if(item.highlight){
+    if (item.highlight) {
       style.background = '#ffffb3';
     }
 
     return (
-
-       <div style={style} className="item" id={style ? item.id : null}>
+      <div style={style} className="item" id={style ? item.id : null}>
         <div className="item-name">{`${item.user.screen_name}`}</div>
         <div className="item-container">
           <div className="item-content">
             <div className="item-author">{`${item.user.name}`}</div>
-            <div dangerouslySetInnerHTML={ { __html: item.html_text } }></div>
+            <div dangerouslySetInnerHTML={ {__html: item.html_text} }></div>
           </div>
         </div>
         <div className="item-perfomers">
           <div className="add-perfomers" onClick={() => {
-
-            console.log('-----------------------------');
-            console.log(this.state.glyph);
-            console.log(this.state.glyph == 'star-empty');
-            {/*if(this.state.glyph === 'star'){*/}
-              {/*console.log("In this part")*/}
-              {/*this.setState({glyph: 'star'});*/}
-            {/*}  else {*/}
-              {/*this.setState({glyph: 'star-empty'});*/}
-            {/*}*/}
-            {/*this.setState({glyph: (this.state.glyph == 'star-empty')? 'star': 'star-empty'});*/}
-            console.log(this.state.glyph);
             this.props.star(this.props.y);
           }}>
-            {/*<Glyphicon glyph={this.state.glyph}/>*/}
             <Glyphicon glyph={glyph}/>
           </div>
           <div className="delete-perfomers">
             <Glyphicon glyph="remove"/>
           </div>
         </div>
-      </div>
-    );
+      </div>);
   }
-};
 
-Card.propTypes = {
-  item: PropTypes.object.isRequired,
-    style: PropTypes.object,
-    star: PropTypes.func.isRequired,
-  y: PropTypes.number
-};
-
-
-
-
-{/*Card.propTypes = propTypes;*/}
-//
-// export default Card;
-
+}

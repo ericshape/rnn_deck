@@ -24,22 +24,6 @@ const InitialState = Record({
 const initialState = new InitialState;
 
 
-// reorder an array based on ID
-function reorder(arr){
-  arr.sort((a, b)=>{
-    return a.id-b.id;
-  })
-}
-
-
-function highlight(newLists, listId, cardId){
-newLists.forEach((list, i)=>{
-  if(listId != i){
-    list.cards[cardId].highlight = true;
-  }
-});
-}
-
 export default function lists(state = initialState, action) {
   switch (action.type) {
     case GET_LISTS_START:
@@ -158,8 +142,6 @@ export default function lists(state = initialState, action) {
       const newLists = [...state.lists];
       const {listId} = action;
       let len = newLists.length;
-      console.log("-------listId---------------");
-      console.log(listId);
       let cards = JSON.parse(JSON.stringify(newLists[listId].cards));
       newLists.push({
         id: len,
@@ -168,7 +150,6 @@ export default function lists(state = initialState, action) {
         // name: faker.commerce.productName(),
         cards: cards
       });
-      console.log(newLists);
 
       return state.withMutations((ctx) => {
         ctx.set('lists', newLists);
@@ -191,20 +172,43 @@ export default function lists(state = initialState, action) {
     }
 
     case STAR_CARD: {
-      const newLists = [...state.lists];
+
+      // reorder an array based on ID
+      function reorder(arr) {
+        arr.sort((a, b) => {
+          if (a.id < 0 && b.id < 0) {
+            return Math.abs(a.id) - Math.abs(b.id);
+          } else {
+            return a.id - b.id;
+          }
+        })
+      }
+
+
+      function highlight(newLists, listId, id) {
+        newLists.forEach((iList, i) => {
+          if (listId != i) {
+            iList.cards.forEach((card) => {
+              if (card.id == id) {
+                card.highlight = !card.highlight;
+                card.id += 0.1;
+              }
+            })
+          }
+        });
+      }
+
+
+      let newLists = [...state.lists];
       const {listId, cardId} = action;
 
       let selectedList = newLists[listId].cards;
-      console.log(selectedList);
       selectedList[cardId].id *= -1;
       selectedList[cardId].star = !selectedList[cardId].star;
 
-      selectedList[cardId].highlight = !selectedList[cardId].highlight;
-
+      highlight(newLists, listId, Math.abs(selectedList[cardId].id));
       reorder(selectedList);
-      highlight(newLists, listId, cardId);
 
-      // console.log(newLists);
       return state.withMutations((ctx) => {
         ctx.set('lists', newLists);
       });
