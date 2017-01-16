@@ -138,7 +138,7 @@ export default class Cards extends Component {
           <Card
                 x={x} y={i}
                 item={item}
-                key={item.id}
+                key={'' + x + i + item.id}
                 stopScrolling={this.props.stopScrolling}
                 star={this.props.star}
           />
