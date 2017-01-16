@@ -138,7 +138,7 @@ export default class Cards extends Component {
           <Card
                 x={x} y={i}
                 item={item}
-                key={item.id}
+                key={'' + x + i + item.id}
                 stopScrolling={this.props.stopScrolling}
                 star={this.props.star}
           />
@@ -166,8 +166,7 @@ export default class Cards extends Component {
       cardList.push(<div key="placeholder" className="item placeholder"/>);
     }
 
-    // return connectDropTarget(
-    return (
+    return connectDropTarget(
       <div className="desk-items">
         {cardList}
       </div>
