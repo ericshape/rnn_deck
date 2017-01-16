@@ -57,6 +57,16 @@ tool did this well, another well, and conclude claims.
 better model will achieve the better user experience.  
 
 
+
+\begin{itemize}
+  \item Based on our knowledge, this is the first visual analytics tool to track, detect and analyze the rumor on social media for journalists society. We propose the first real time rumor visual analytics system including debunking algorithm for Twitter.
+  
+  \item We built this tool based on the pre-survey of the professional journalists. Thus, we design our visual analytics tool for rumor detection and analysis for journalists. 
+  
+  \item We use the multiple ``newsworthy” tweets for our research. However, other study is most based on the single event, like Boston bombing. Thus, our research conclusions can be more general to apply to the normal rumor prediction and application. 
+\end{itemize}
+
+
 \section{Research Questions}
 
 RQ 1:
@@ -187,7 +197,7 @@ rnn会对vector做incremental的修改
 
 
 
-
+\section{News Discovery from Tweets}
 
 \subsection{Traditional News Discovery Process from Tweets}
 Today, more and more sources of news are from social media. Newman et al. \cite{Newman2011} find that the social media is more important than mainstream media, like TV, newspapers and magazine, to play a role to broadcast news and information to general audience. Due to the large participants and diversity of information, social media could have breaking news earlier than that in mainstream media \cite{Kwak2010}. The journalists in news agency highly focus on the news feeds and resources from social media, such as Twitter, Facebook and Instagram. However, even if the journalist professionals, verifying false rumors and misinformation are still time-consuming and difficult work. In most of case, journalist professionals filter them via the information credibility \cite{Silverman2014}. 
@@ -207,6 +217,16 @@ At the same time, the result of our preliminary survey for the journalists in Th
   \item Try to manually verify by contacting the news source.
 \end{itemize}
 \end{itemize}
+
+
+\subsection{Need more information to verify}
+
+Cognitive psychology studies found that the tendency of individuals to estimate the likelihood of an event ``by the ease with which instances or associations come to mind” \cite{Tversky1973} (also known as availability heuristics). It means that people would like to assign more value to information they can easily recall, such as information that is more emotionally resonant or more recent \cite{Schwarz1991}. This tendency might lead to biases during the judgement and verification.  
+
+Avoiding these biases of journalists for credibility judgement is important in the news production process. Providing more information to journalists for their analysis is a solution to this problem. However, the overwhelming of social media information would require heavy mental demands and physical demands of journalists in their credibility assessment process. 
+
+For current journalists and news reporters for the social media, they firstly have to find the person who is responsible for the content. As explained in \cite{Silverman2014} ,``Researching the history of an uploader can mimic the characteristics of an old-fashioned police investigation, and perhaps also make you feel more like a stalker rather than a journalist or researcher." 
+At the same time, since people spend more of their lives on different social networks, they do not realize their footprints can be identify as clues to build a meaningful news story.
 
 
 
@@ -304,6 +324,15 @@ We utilize recurrent neural network (RNN) to train a classification model for ha
 The second contribution is that we conducted a controlled experiment that compared the use of four different techniques to support typical tweets news discovery tasks of social media journalists: simple twitter deck like approach,  approach with predicted hashtag only, approach with tweet embedding search only,  and approach with both predicted hashtags and tweet embedding search.
 
 We expect the results of this experiment would show that predicted hashtags and tweet embedding search from RNN model could improve performance on tasks for social media news discovery related mounts of tweets. We also expect the results would show that the approach with both predicted hashtags and tweet embedding search is the most effective of the four techniques we tested.
+
+
+\textcolor{red}{
+This research will increase the understanding of interaction within visual analytic applications through exploring spatial interaction, a new design space of interaction within visual analytic applications. Designing applications for spatial interaction should lead to more usable and powerful visualizations capable of increasing users’ insights into complex datasets. Specific contributions of this work include:
+An interaction design space (spatial interaction) for exploratory analysis of textual information within a spatialization 
+Identification of challenges and changes to mathematical models and visualization frameworks to support spatial interaction 
+Evaluation of effectiveness of spatial interaction for intelligence analysis of textual information
+Overall, these contributions are focused on advancing the goal of visual analytics of enabling users to gain insight into complex datasets by combining human intuition, statistical computation, and visualization.
+}
 
 
 
