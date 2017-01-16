@@ -166,8 +166,7 @@ export default class Cards extends Component {
       cardList.push(<div key="placeholder" className="item placeholder"/>);
     }
 
-    // return connectDropTarget(
-    return (
+    return connectDropTarget(
       <div className="desk-items">
         {cardList}
       </div>

@@ -16,8 +16,14 @@ export default class Card extends Component {
   }
 
   render() {
-    const {style, item, star, isHighlighted} = this.props;
+    let {style, item, star, isHighlighted} = this.props;
     let glyph = 'star-empty';
+
+    if (typeof style === "undefined") {
+      style = {};
+    }
+
+
     if (item.star) {
       glyph = 'star';
       style.background = '#ffffb3';
