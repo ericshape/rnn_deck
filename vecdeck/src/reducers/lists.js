@@ -162,34 +162,47 @@ export default function lists(state = initialState, action) {
                 card.id += 0.5;
               }
             })
+          } else {
+            iList.cards.forEach((card) =>{
+              if (!card.star && card.id == id){
+
+                card.highlight = true;
+                card.id += 0.5;
+              }
+            })
+
           }
         });
       }
 
       function unHighlight(newLists, listId, id, cardId) {
 
+
+        // count stars
         let count = 0;
         newLists.forEach((iList, i) => {
-          if (listId != i) {
+          // if (listId != i) {
             iList.cards.forEach((card) => {
               if (card.id == -id) {
                 count++;
               }
-            })
-          }
+            });
+          // }
         });
+
+        // unhighlight all the highlighted card.
         if (count == 0) {
           newLists.forEach((iList, i) => {
-            if (listId != i) {
+            // if (listId != i) {
               iList.cards.forEach((card) => {
                 if (Math.floor(card.id) == id && card.highlight) {
                   card.highlight = false;
                   card.id = Math.floor(card.id);
                 }
-              })
-            }
+              });
+            // }
           });
-        } else {
+        } else { // just highlight the unstar card.
           newLists[listId].cards[cardId].highlight = true;
           newLists[listId].cards[cardId].id +=0.5;
         }
