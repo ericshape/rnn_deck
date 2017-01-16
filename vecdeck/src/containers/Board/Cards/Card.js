@@ -19,21 +19,31 @@ export default class Card extends Component {
     let {style, item, star, isHighlighted} = this.props;
     let glyph = 'star-empty';
 
-    if (typeof style === "undefined") {
-      style = {};
-    }
+    // console.log(style);
+    // console.log(style.background);
+    // if (typeof style === "undefined") {
+    //   style = {};
+    // }
 
 
+    // style.background = null;
+
+    // console.log(style);
+    //
+    // console.log(style.background);
+
+    let background;
     if (item.star) {
       glyph = 'star';
-      style.background = '#ffffb3';
+      // style.background = '#ffffb3';
+      background = '#ffffb3';
     }
     if (item.highlight) {
-      style.background = '#ffffb3';
+      background = '#ffffb3';
     }
 
     return (
-      <div style={style} className="item" id={style ? item.id : null}>
+      <div style={style}  style = {{background: background}} className="item" id={style ? item.id : null}>
         <div className="item-name">{`${item.user.screen_name}`}</div>
         <div className="item-container">
           <div className="item-content">
