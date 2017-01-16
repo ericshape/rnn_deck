@@ -1207,7 +1207,7 @@ let tweets = [
 export function getLists(quantity) {
 
   tweets.map(function (d, i) {
-    d.id = i;
+    d.id = i+1;
     d.firstName = "hello";
     d.lastName = "world";
     d.title = "this is a tile";
@@ -1227,8 +1227,6 @@ export function getLists(quantity) {
     cards: JSON.parse(JSON.stringify(tweets))
   });
 
-  console.log("list------------------------");
-  console.log(lists);
 
   return (dispatch) => {
     dispatch({type: GET_LISTS, lists, tweets: tweets, isFetching: true});
