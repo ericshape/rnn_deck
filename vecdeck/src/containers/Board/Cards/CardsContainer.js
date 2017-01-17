@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {DropTarget, DragSource} from 'react-dnd';
-import {Button, ButtonToolbar, Dropdown, MenuItem} from 'react-bootstrap'
+import {Button, ButtonToolbar, MenuItem} from 'react-bootstrap';
+import Dropdown from 'react-dropdown';
+
+
 // import Button from 'react-bootstrap/lib/Button'
 
 import Cards from './Cards';
@@ -82,6 +85,14 @@ export default class CardsContainer extends Component {
 
     let tags = item.tags;
 
+    const options = [
+      { value: 'one', label: 'One' },
+      { value: 'two', label: 'Two' },
+    ];
+
+    const defaultOption = options[0];
+
+
     return connectDragSource(connectDropTarget(
       <div className="desk" style={{opacity}}>
         <div className="desk-head">
@@ -108,7 +119,12 @@ export default class CardsContainer extends Component {
           }} />
         </div>
 
-        {/*<br/>*/}
+        <div  style={{textAlign:'center'}}>
+          <div style={{display:'inline', textAlign: 'bottom', height: '26px', paddingTop: '20px'}}>Sort by:</div>
+          <Dropdown options={options} onChange={()=>{console.log("hello world");}} value={defaultOption} placeholder="Select an option" />
+        </div>
+
+        <br/>
 
         <Cards
           moveCard={moveCard}
