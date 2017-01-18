@@ -7,6 +7,7 @@ import {
   MOVE_LIST,
   ADD_LIST,
   SEARCH_LIST,
+  RANK_LIST,
   COPY_LIST,
   DELETE_LIST,
   STAR_CARD,
@@ -74,6 +75,8 @@ export default function lists(state = initialState, action) {
         ctx.set('lists', newLists);
       });
     }
+
+
     case SEARCH_LIST: {
       const newLists = [...state.lists];
       const {listId, tags} = action;
@@ -105,6 +108,63 @@ export default function lists(state = initialState, action) {
       });
     }
 
+    case RANK_LIST: {
+
+      function rankList(li, rank) {
+
+        switch (rank) {
+          case 'CREATE_TIME': {
+            li.sort((a, b)=>{
+              return (Date.parse(b.created_at) - Date.parse(a.created_at));
+            });
+            break;
+          }
+          case 'CLAIM_ID': {
+            li.sort((a, b)=>{
+              return a.claim_id - b.claim_id;
+            });
+            break;
+          }
+          case 'TWEET_ID': {
+            li.sort((a, b)=>{
+              return (a.id_str - b.id_str);
+            });
+            break;
+          }
+          case 'LANGUAGE': {
+            li.sort((a, b)=>{
+              return a.lang - b.lang;
+            });
+            break;
+          }
+          case 'COUNT': {
+            li.sort((a, b) =>{
+              return b.retweet_count - a.retweet_count;
+            });
+            break;
+          }
+          case 'OPINION': {
+            li.sort((a, b)=>{
+              return b.opinion - a.opinion;
+            });
+            break;
+          }
+          default: {
+            li.sort(rankBy('created_at', 'up'));
+          }
+        }
+      }
+
+      let newLists = [...state.lists];
+      const {listId, rank} = action;
+      rankList(newLists[listId].cards, rank);
+      newLists[listId].rank = rank;
+
+      return state.withMutations((ctx) => {
+        ctx.set('lists', newLists);
+      });
+    }
+
     case COPY_LIST: {
 
       const newLists = [...state.lists];
@@ -114,6 +174,7 @@ export default function lists(state = initialState, action) {
       newLists.push({
         id: len,
         tags: newLists[listId].tags,
+        rank: newLists[listId].rank,
         suggestions: newLists[listId].suggestions,
         // name: faker.commerce.productName(),
         cards: cards
@@ -147,6 +208,7 @@ export default function lists(state = initialState, action) {
           if (a.id < 0 && b.id < 0) {
             return Math.abs(a.id) - Math.abs(b.id);
           } else {
+            console.log(a.id-b.id);
             return a.id - b.id;
           }
         })
@@ -163,8 +225,8 @@ export default function lists(state = initialState, action) {
               }
             })
           } else {
-            iList.cards.forEach((card) =>{
-              if (!card.star && card.id == id){
+            iList.cards.forEach((card) => {
+              if (!card.star && card.id == id) {
 
                 card.highlight = true;
                 card.id += 0.5;
@@ -182,11 +244,11 @@ export default function lists(state = initialState, action) {
         let count = 0;
         newLists.forEach((iList, i) => {
           // if (listId != i) {
-            iList.cards.forEach((card) => {
-              if (card.id == -id) {
-                count++;
-              }
-            });
+          iList.cards.forEach((card) => {
+            if (card.id == -id) {
+              count++;
+            }
+          });
           // }
         });
 
@@ -194,17 +256,17 @@ export default function lists(state = initialState, action) {
         if (count == 0) {
           newLists.forEach((iList, i) => {
             // if (listId != i) {
-              iList.cards.forEach((card) => {
-                if (Math.floor(card.id) == id && card.highlight) {
-                  card.highlight = false;
-                  card.id = Math.floor(card.id);
-                }
-              });
+            iList.cards.forEach((card) => {
+              if (Math.floor(card.id) == id && card.highlight) {
+                card.highlight = false;
+                card.id = Math.floor(card.id);
+              }
+            });
             // }
           });
         } else { // just highlight the unstar card.
           newLists[listId].cards[cardId].highlight = true;
-          newLists[listId].cards[cardId].id +=0.5;
+          newLists[listId].cards[cardId].id += 0.5;
         }
       }
 
@@ -212,15 +274,15 @@ export default function lists(state = initialState, action) {
       const {listId, cardId} = action;
       let selectedList = newLists[listId].cards;
 
-      if(selectedList[cardId].star){
+      if (selectedList[cardId].star) {
         selectedList[cardId].id = Math.abs(selectedList[cardId].id);
         selectedList[cardId].star = false;
         unHighlight(newLists, listId, selectedList[cardId].id, cardId);
       } else {
         selectedList[cardId].star = true;
         selectedList[cardId].highlight = false;
-        selectedList[cardId].id = - Math.floor(selectedList[cardId].id);
-        highlight(newLists, listId, - selectedList[cardId].id)
+        selectedList[cardId].id = -Math.floor(selectedList[cardId].id);
+        highlight(newLists, listId, -selectedList[cardId].id)
       }
 
       reorder(selectedList);

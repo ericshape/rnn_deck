@@ -7,6 +7,7 @@ export const MOVE_CARD = 'MOVE_CARD';
 export const MOVE_LIST = 'MOVE_LIST';
 export const ADD_LIST = 'ADD_LIST';
 export const SEARCH_LIST = 'SEARCH_LIST';
+export const RANK_LIST = 'RANK_LIST';
 export const COPY_LIST = 'COPY_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
 export const TOGGLE_DRAGGING = 'TOGGLE_DRAGGING';
@@ -1216,17 +1217,16 @@ export function getLists(quantity) {
     d.highlight = false;
   });
 
-
   let lists = [];
 
   lists.push({
     id: 0,
+    rank:'CREATE_TIME',
     name: faker.commerce.productName(),
     tags: [],
     suggestions: [],
     cards: JSON.parse(JSON.stringify(tweets))
   });
-
 
   return (dispatch) => {
     dispatch({type: GET_LISTS, lists, tweets: tweets, isFetching: true});
@@ -1258,6 +1258,12 @@ export function searchList(listId, tags){
   }
 }
 
+export function rankList(listId, rank){
+  console.log("rankList");
+  return (dispatch) => {
+    dispatch({type: RANK_LIST, listId, rank});
+  }
+}
 
 export function copyList(listId){
   console.log("copyList");

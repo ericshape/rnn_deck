@@ -76,6 +76,10 @@ export default class CardsContainer extends Component {
     isScrolling: PropTypes.bool,
 
     searchList: PropTypes.func.isRequired,
+
+    rankList: PropTypes.func.isRequired,
+    rank: PropTypes.string,
+
     star: PropTypes.func.isRequired
   };
 
@@ -85,12 +89,52 @@ export default class CardsContainer extends Component {
 
     let tags = item.tags;
 
+
+    // 'CREAT_TIME'
+    // 'TWEET_ID'
+    // 'LANGUAGE'
+    // 'RETWEET_COUNT'
+    // 'OPINION'
     const options = [
-      { value: 'one', label: 'One' },
-      { value: 'two', label: 'Two' },
+      { value: 'CREATE_TIME', label: 'Time' },
+      { value: 'CLAIM_ID', label: 'Claim id' },
+      { value: 'TWEET_ID', label: 'Tweet id' },
+      { value: 'LANGUAGE', label: 'Language' },
+      { value: 'COUNT', label: 'Retweet count' },
+      { value: 'OPINION', label: 'Opinion' }
     ];
 
-    const defaultOption = options[0];
+
+    let defaultOption;
+    switch (this.props.rank){
+      case 'CREATE_TIME':{
+        defaultOption = options[0];
+        break;
+      }
+      case 'CLAIM_ID':{
+        defaultOption = options[1];
+        break;
+      }
+      case 'TWEET_ID':{
+        defaultOption = options[2];
+        break;
+      }
+      case 'LANGUAGE':{
+        defaultOption = options[3];
+        break;
+      }
+      case 'COUNT':{
+        defaultOption = options[4];
+        break;
+      }
+      case 'OPINION': {
+        defaultOption = options[5];
+        break;
+      }
+      default:{
+        defaultOption = options[0];
+      }
+    }
 
 
     return connectDragSource(connectDropTarget(
@@ -120,8 +164,9 @@ export default class CardsContainer extends Component {
         </div>
 
         <div  style={{textAlign:'center'}}>
-          <div style={{display:'inline', textAlign: 'bottom', height: '26px', paddingTop: '20px'}}>Sort by:</div>
-          <Dropdown options={options} onChange={()=>{console.log("hello world");}} value={defaultOption} placeholder="Select an option" />
+          <div style={{display:'inline',  verticalAlign: 'bottom'}}>Sort by:</div>
+          <Dropdown options={options} onChange={(selected)=>{this.props.rankList(item.id, selected.value);}} value={defaultOption} placeholder="Select an option" />
+          {/*<Dropdown options={options} onChange={()=>{console.log("hello world");}} value={defaultOption} placeholder="Select an option" />*/}
         </div>
 
         <br/>
