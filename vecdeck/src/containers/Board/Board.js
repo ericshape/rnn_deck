@@ -45,6 +45,7 @@ export default class Board extends Component {
     this.state = { isScrolling: false };
 
     this.searchList = this.searchList.bind(this);
+    this.rankList = this.rankList.bind(this);
     this.copyList = this.copyList.bind(this);
     this.deleteList = this.deleteList.bind(this);
     this.star = this.star.bind(this);
@@ -113,6 +114,10 @@ export default class Board extends Component {
     this.props.searchList(listId, tags);
   }
 
+  rankList(listId, rank){
+    this.props.rankList(listId, rank);
+  }
+
   copyList(listId){
 
     console.log(listId);
@@ -168,6 +173,9 @@ export default class Board extends Component {
             x={i}
 
             searchList={this.searchList}
+            rankList={this.rankList}
+            rank={item.rank}
+
             star={this.star}
           />
         )}
