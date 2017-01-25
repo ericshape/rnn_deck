@@ -1,36 +1,33 @@
 
-\section{Opportunities and Motivation}
+\section{Motivation}
 
-There is an abundance of information available from social media, like Twitter. Today, more and more sources of news are from social media. Newman et al. \cite{Newman2011} find that the social media is more important than mainstream media, like TV, newspapers and magazine, to play a role to broadcast news and information to general audience. Due to the large participants and diversity of information, social media could have breaking news earlier than that in mainstream media \cite{Kwak2010}. The journalists in news agency highly focus on the news feeds and resources from social media, such as Twitter, Facebook and Instagram. However, even if the journalist professionals, verifying false rumors and misinformation are still time-consuming and difficult work. In most of case, journalist professionals filter them via the information credibility \cite{Silverman2014}. 
+\subsection{News on Social Media}
 
-Twitter can allow users to post, publish, share and communicate by tweets, which is a 140 characters limited short message. Because of this characters limited feature, the languages in tweets is including a lot of abbreviations and emotion icons. 
+There is an abundance of information available from social media, like Twitter, Facebook, and Instagram. Today, more and more sources of news are from social media. We call them as ``newsworthy" tweets on Twitter. Newman et al. \cite{Newman2011} find that the social media is more important than mainstream media, like TV, newspapers and magazine, to play a role to broadcast news and information to general audience. Due to the large participants and diversity of information, social media could have breaking news earlier than that in mainstream media \cite{Kwak2010}. 
 
+Social media, like Twitter, is valuable to professional journalists in developing news stories. They highly focus on ``newsworthy" tweets and resources from social media. However, even if the journalist professionals, verifying ``newsworthy" tweets and generate a fair view news reports are still time-consuming and difficult work. In most of case, journalist professionals filter them via the information credibility \cite{Silverman2014}. 
 
-Another important feature is that tweets allow users to use ``@" for reply to specific another users and ``\#" for the self-tagging and self-categories. 
+\subsection{Twitter and Hashtags}
 
-The hashtags in tweets are the words that are preceded by a hash symbol (\#). And there is no space in one hashtag. The hashtags can be used in the beginning, the middle and the end of tweets for the operation of tagging or annotation. In Twitter, if you click the hashtag, it will be linked to the page displaying other tweets that contains the same hashtag on Twitter. Hashtags do not just appear in Twitter. They are also used in Flicker, Pinterest, Instagram, and Facebook. 
+Twitter can allow users to post, publish, share and communicate by tweets, which is a 140 characters limited short message. Because of this characters limited feature, the languages in tweets is including a lot of abbreviations and emotion icons. Another important feature is that tweets allow users to use ``@" for reply to specific another users and ``\#" for the self-tagging and self-categories. 
 
-
-Social media users add hashtags in their posts for different goals, including identification label (\#VT or \#Hokie), sentiment label (\#love, \#like, or \#hate), topic label (\#hiking), event label (\#uselection2016) and etc.. Thus, hashtags provide labels for their texts.
-
-
-
-Twitter platform is valuable to professional journalists in developing news stories. 
-
-Problem: Twitter information is disorganized, working with it creates high cognitive load and physical demands on users, discover of relevant tweets is difficult because they are not clustered by similarity 
-
-Existing Solutions (How is it done today, second step in Heilmeir, including limits of existing solutions): Existing tools to help organize tweets include Tweet Deck, among others; elaborate on how
+The hashtags in tweets are the words that are preceded by a hash symbol (\#). And there is no space in one hashtag. The hashtags can be used in the beginning, the middle and the end of tweets for the operation of tagging or annotation. In Twitter, if you click the hashtag, it will be linked to the page displaying other tweets that contains the same hashtag on Twitter. Hashtags do not just appear in Twitter. They are also used in Flicker, Pinterest, Instagram, and Facebook. Social media users add hashtags in their posts for different goals, including identification label (\#VT or \#Hokie), sentiment label (\#love, \#like, or \#hate), topic label (\#hiking), event label (\#uselection2016) and etc.. Thus, hashtags provide labels for their texts.
 
 
-Proposed new solution is the tool to organize tweets efficiently. 
+\subsection{Problems and Challenges}
 
-The innovation part of my approach is creating hashtags for tweets of similar topic through RNN model. At the same time, our model also bring the tweet embedding into the tweets organizing process.  User can efficiently find similar tweets within vector space of tweets embedding from RNN model. 
+The essential challenge is that ``newsworthy" tweets are disorganized in existing Twitter platform, like TweetDeck. In TweetDeck, despite users can search them by keywords, list them by accounts, and sort them in chronological order,  working with them for news discovery still creates high cognitive load and physical demands on users. It is difficult to discover relevant tweets because tweets are not clustered by similarity.  
 
-Why will it be successful? (performance tests of resulting hashtags from RNN model indicate higher accuracy of hashtags assigned for clustering than other procedures - LDA?)
+\subsection{Proposed Approaches}
 
-who cares? what difference will it make?  (journalists should care; your tools should reduce cognitive load, improve discovery of information, etc.
+Our new visual analytics design would organize ``newsworthy" tweets efficiently for news discovery. We believe our new design based RNN model would reduce cognitive load and physical demands on users. And it would improve news discovery process. 
 
-I don’t know about risks and costs or how long it will take Heilmieir steps — these may not be so pertinent for the overview.
+The innovation part of our approach is creating hashtags for tweets of similar topic through RNN model. At the same time, our model also bring the tweet embedding into the tweets organizing process.  User can efficiently find similar tweets within the vector space of tweets embedding from RNN model. 
+
+%Why will it be successful? 
+performance tests of resulting hashtags from RNN model indicate higher accuracy of hashtags assigned for clustering than other procedures - LDA?
+
+\subsection{Proposed Contribution}
 
 What are the mid-term and final ‘exams' to check for success?  These would be the user evaluation studies you should describe in the overview that link back to the steps about why you think your proposed re-design of Tweetdeck will be successful (how will the user evaluation measure this?) and what difference will your re-design make (such as, cognitive and physical loads, news discovery; how will you measure these differences between TweetDeck and your re-design of TweetDeck?).
 
@@ -46,11 +43,11 @@ how to organize tweets better
 
 predict hashtags via RNN: machine learning can help
 
-solution: redesign tweet deck based on rnn model result
+solution: redesign tweet deck based on RNN model result
 
 for journalist for social media. 
 
-how to design a model. how to design 
+how to design a model. 
 
 
 
@@ -65,12 +62,51 @@ better model will achieve the better user experience.
 
 \begin{itemize}
   \item Based on our knowledge, this is the first visual analytics tool to track, detect and analyze the rumor on social media for journalists society. We propose the first real time rumor visual analytics system including debunking algorithm for Twitter.
+
+ \item 
   
   \item We built this tool based on the pre-survey of the professional journalists. Thus, we design our visual analytics tool for rumor detection and analysis for journalists. 
   
-  \item We use the multiple ``newsworthy” tweets for our research. However, other study is most based on the single event, like Boston bombing. Thus, our research conclusions can be more general to apply to the normal rumor prediction and application. 
+  \item We use the multiple ``Newsworthy" tweets for our research. However, other study is most based on the single event, like Boston bombing. Thus, our research conclusions can be more general to apply to the normal rumor prediction and application. 
 \end{itemize}
 
+
+
+\section{Anti Bias Visualization for New Discovery}
+
+% Give an overview about social media and twitter. 
+Nowadays, social media has dominated the media world in our daily life. We get news from Facebook, Twitter, Instagram, and etc. However, simultaneously, rumors and misinformation also fill within the community of social media and spread broadly over this platform.
+
+Research shows that, the more information the journalists get, they can make the more correct decision about the rumors and make a un-bias report. 
+
+% Give an overview about the role of rumor. 
+Rumor and misinformation would spread across social media very rapidly and widely in very similar patterns as true information propagates. In a lot of cases, even social media audience could not distinguish which one in trend is a rumor or real information. Mendoza et al. found that, during a rumor crisis, there is no more significant change in the network topology characteristics of propagation. At the same time, the false rumor would be more questioned by the audience than that in confirmed fact \cite{Mendoza2010}.  
+
+\subsection{What is Rumor in Social Media}
+% Give the definition of rumor. 
+\textit{Rumor} is a broad concept we used in our daily life. In the Merriam-Webster Online Dictionary \footnote{http://www.merriam-webster.com}, \textit{rumor} is defined as:
+\begin{quotation}
+\textit{Information or a story that is passed from person to person but has not been proven to be true. }
+\end{quotation}
+The Cambridge Dictionaries Online \footnote{http://dictionary.ca    mbridge.org} explains \textit{rumor} as:
+\begin{quotation}
+\textit{An ​unofficial ​interesting ​story or ​piece of ​news that might be ​true or ​invented, and ​quickly ​spreads from ​person to ​person. }
+\end{quotation}
+
+% Give several examples about rumor. 
+Rapidly and widely broadcasted rumors or misinformation appear everyday on social media, such as:
+
+\begin{itemize}
+  	\item Technology Rumor: Apple would eliminate the headphone jack for iPhone 7 in order to force users to purchase expensive Bluetooth equipment or proprietary headphones \footnote{http://www.snopes.com/iphone-7-headphone-jack-controversy}.
+  	\item Political Rumor: Donald Trump announced that his 2016 Presidential campaign was an April Fool's Day joke \footnote{http://www.snopes.com/donald-trump-campaign-joke}.
+  	\item Entertainment Rumor: Justin Bieber had been stabbed by a crazed fan in April 2012 \footnote{http://www.snopes.com/computer/facebook/bieberstabbed.asp}.
+\end{itemize}
+
+Much of rumors on social media like above have increased significantly and deeply influence our daily life significantly. Rumors can spread the feelings of fear, hate, or even euphoria. They might be as the starting point of the serious defamation (of people, brands, governments etc.), protests, destruction of property, or other undesirable responses \cite{Nourbakhsh2015}. 
+
+In research domain, rumor has been studied in two different views: psychology analysis view and computational social analysis view \cite{Donovan2007}. Researchers in computation more specifically focuses on its propagation behavior on social media \cite{Qazvinian2011}. In this paper and our following discussion, we would narrow down the concept of \textit{rumor} to its subset: false rumor. 
+
+False rumors do not only exist in the crisis, It can also happens in non-crisis cases. A very famous incident is that the hacked AP account tweeted a rumor that Barack Obama had been injured in an explosion at the White House in 2015. According to the report from The Washington Post, this fake tweet shaken the global stock market and wipe off around 130 Billion dollars of stock values immediately \cite{Fisher2013}. 
 
 \section{Research Questions}
 
@@ -231,6 +267,7 @@ Cognitive psychology studies found that the tendency of individuals to estimate 
 Avoiding these biases of journalists for credibility judgement is important in the news production process. Providing more information to journalists for their analysis is a solution to this problem. However, the overwhelming of social media information would require heavy mental demands and physical demands of journalists in their credibility assessment process. 
 
 For current journalists and news reporters for the social media, they firstly have to find the person who is responsible for the content. As explained in \cite{Silverman2014} ,``Researching the history of an uploader can mimic the characteristics of an old-fashioned police investigation, and perhaps also make you feel more like a stalker rather than a journalist or researcher." 
+
 At the same time, since people spend more of their lives on different social networks, they do not realize their footprints can be identify as clues to build a meaningful news story.
 
 
@@ -240,12 +277,21 @@ At the same time, since people spend more of their lives on different social net
 \section{User Interface Design}
 
 
-\subsection{Hashtag }
+\subsection{Predicted Hashtags}
+
+
+\subsection{Tweets Embedding Search}
+
+
+\subsection{RNN Mini-Map Vis for Anti-Bias News Discovery}
 
 
 
 
 \section{User Study}
+
+
+1. 
 
 This section will introduce the research questions we would explore and detail information about our participants, experimental setting, and the study methodology we would deploy. 
 
