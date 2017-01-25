@@ -1219,7 +1219,9 @@ export function getLists(quantity) {
 
   let url = "http://localhost:5000/tweets/tweets/9";
 
-  fetch(url, {mode: 'no-cors'})
+  fetch(url, {
+    mode: 'no-cors',
+    method: 'get'})
     .then(function(response) {
       if (response.status >= 400) {
         throw new Error("Bad response from server");
