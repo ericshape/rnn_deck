@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en" ng-app="Twitter">
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.css">
+    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-glyphicons.min.css">-->
+    <link rel='stylesheet' href='/stylesheets/TweetList.css'/>
+    <link rel="stylesheet" href="/bower_components/dcjs/dc.css"/>
+
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="/bower_components/lodash/dist/lodash.js"></script>
+    <script src="/bower_components/underscore/underscore.js"></script>
+    <script src="/bower_components/crossfilter/crossfilter.js"></script>
+    <script src="/bower_components/d3/d3.js"></script>
+    <script src="/bower_components/dcjs/dc.js"></script>
+
+    <script src="/modules/angular-1.3.10/angular.js"></script>
+    <script src="/modules/angular-1.3.10/angular-resource.js"></script>
+    <script src="/modules/angular-1.3.10/angular-sanitize.js"></script>
+
+
+    <script src="/bower_components/angular-dc/dist/angular-dc.js"></script>
+    <script src="/bower_components/ng-crossfilter/dist/ng-crossfilter.js"></script>
+    <script src="/bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+
+
+    <!--<script src="/bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>-->
+    <script src="//npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
+    <script src="//platform.twitter.com/widgets.js"></script>
+    <script src="/javascripts/TweetList.js"></script>
+
+</head>
+<body>
+
+<!-- the root element of the view assigned to the TweetList javascript controller-->
+<div ng-controller="TweetList" id="col-md-4">
+
+    <div id="search-container" class="row">
+        <div class="col-md-3">
+
+            <!--<label>Load Rumor Collection:</label>-->
+            <form class="input-group" ng-submit="getTweets()">
+                <span class="input-group-addon">Claim ID</span>
+
+                <!-- this text input is binded to a variable in the javascript controller -->
+                <!--<input type="text" class="form-control" placeholder="ABC" ng-model="username" >-->
+                <input type="text" class="form-control" placeholder="9" ng-model="claim_id">
+					<span class="input-group-btn">
+		                <button class="btn btn-default" type="submit">Get Tweets</button>
+		            </span>
+
+            </form>
+
+
+            <!--ng-submit="getTweets()"-->
+            <!--<label>Keyword Search:</label>-->
+            <form class="input-group">
+                <span class="input-group-addon">Keyword</span>
+
+                <!-- this text input is binded to a variable in the javascript controller -->
+                <!--<input type="text" class="form-control" placeholder="ABC" ng-model="username" >-->
+                <input type="text" class="form-control" placeholder="Search" ng-model="query">
+
+
+                <!--<span class="input-group-btn">-->
+                <!--&lt;!&ndash;<button class="btn btn-default" type="submit">Get Tweets</button>&ndash;&gt;-->
+                <!--</span>-->
+
+            </form>
+            <div class="side"><b>Sort Tweets By: </b></div>
+            <select ng-model="orderProp" class="side form-control" style="width: 170px">
+                <option value="-created_time">created_at</option>
+                <option value="-retweet_count">retweet_count</option>
+                <option value="opinion">opinion</option>
+                <option value="rank">rank</option>
+            </select>
+
+            <div ng-repeat="claim in claimResult">
+                <div><b>Title ({{claim.claim_label}}) :</b> {{claim.claim_title}}</div>
+                <div><b>Detail ({{tweetsResult.length}}) : </b> {{claim.claim_content}}</div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-3">
+            <form class="input-group" ng-submit="vectorCompute()">
+
+                <label for="vector_opt">Drag Tweet(s) into following box(es):</label>
+
+                <select class="form-control" id="vector_opt">
+                    <option value="and">AND</option>
+                    <option value="or">OR</option>
+                    <option value="not">NOT</option>
+                    <option value="like">LIKE</option>
+                </select>
+
+                <!-- this text input is binded to a variable in the javascript controller -->
+                <!--<input type="text" class="form-control" placeholder="ABC" ng-model="username" >-->
+                <input type="text" class="form-control" placeholder="Tweet_ID A" id="tweet_id_a">
+                <input type="text" class="form-control" placeholder="Tweet_ID B" id="tweet_id_b">
+
+                <!--<span class="input-group-btn">-->
+                <button class="btn btn-default" type="submit">Compute</button>
+                <!--</span>-->
+
+            </form>
+        </div>
+
+        <div class="col-md-3">
+
+            <!--ng-submit="getTweets()"-->
+            <form class="input-group">
+
+                <label for="sent_opt">Input Sentence(s) into following box(es):</label>
+
+                <select class="form-control" id="sent_opt">
+                    <option value="and">AND</option>
+                    <option value="or">OR</option>
+                    <option value="not">NOT</option>
+                    <option value="like">LIKE</option>
+                </select>
+
+                <!-- this text input is binded to a variable in the javascript controller -->
+                <!--<input type="text" class="form-control" placeholder="ABC" ng-model="username" >-->
+                <input type="text" class="form-control" placeholder="Sentence A" id="sent_a">
+                <input type="text" class="form-control" placeholder="Sentence B" id="sent_b">
+
+                <!--<span class="input-group-btn">-->
+                <button class="btn btn-default" type="submit">Compute</button>
+                <!--</span>-->
+
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row clearfix">
+        <div class="col-md-3">
+
+            <!--<div class="tweet-card" ng-repeat="tweet in tweetsResult"-->
+            <!--data-tweet="tweet"></div>-->
+
+            <!-- this div will repeat for every tweet object in the array using a template-expanding directive -->
+            <div ng-repeat="tweet in dataDim.top(99999) | filter:query  | orderBy:orderProp"
+                 class="tweet" id="{{ tweet.tweet_id }}"
+                 data-drag="true"
+                 jqyoui-draggable="{index: {{$index}},
+                 placeholder:true,animate:true,
+                 onStart:'startCallback(tweet, $index)',
+                 onStop: 'stopCallback'}"
+                 data-drop="true"
+                 jqyoui-droppable="{index: {{$index}},
+                 onDrop: 'dropCallback'}"
+            >
+                <!--draggable="true" ondragstart="drag(event)"-->
+
+                <span>
+                    <a href="http://www.twitter.com/{{ tweet.user.screen_name }}" target="_blank">
+                        <!--<img class="thumbnail" ng-src="{{ tweet.user.profile_image_url }}"/>-->
+                    </a>
+                </span>
+                <div twitter_id=tweet.tweet_id>
+                    <a tooltip-placement="bottom" tooltip="click to visit Twitter profile"
+                       href="http://www.twitter.com/{{ tweet.user.screen_name }}" target="_blank">
+                        <span class="username" ng-bind="tweet.user.name"></span>
+                    </a>
+                    <span class="username_screen">&#64;{{tweet.user.screen_name}}</span>
+                </div>
+                <div class="pull-right timeInterval">{{tweet.created_at | datetime}}</div>
+                <div class="pull-left opinion">{{tweet.opinion}}</div>
+                <div class="pull-left opinion"> rank: {{ tweet.rank }}</div>
+                <div class="pull-left opinion"> cos_dist: {{ tweet.cos_dis }}</div>
+                <div>
+                    <div class="pull-left timeInterval tweettext " ng-bind-html="tweet.html_text"></div>
+                    <div class="pull-left timeInterval">{{tweet.user.followers_count}} followers</div>
+
+                    <div class="pull-right timeInterval"> {{tweet.retweet_count}} retweets</div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--<div id="dropbox"-->
+        <!--ondrop="drop(event)" ondragover="allowDrop(event)">-->
+        <!--</div>-->
+
+        <div class="col-md-9">
+            <div class="col-md-9" id="chart-line-hitsperday"></div>
+
+            <div class="col-md-6" id="chart-ring-year"></div>
+
+            <div class="col-md-6" style='clear:both;'>
+                <table id="dc-data-table">
+                    <thead>
+                    <tr class="header">
+                        <th>Day</th>
+                        <th>Tweets Text</th>
+                        <th>Twitter User</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
