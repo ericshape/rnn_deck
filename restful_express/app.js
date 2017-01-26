@@ -18,19 +18,19 @@ app.use(bodyParser.json());
 // serve static assets from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// look for view html in the views directory
-app.set('views', path.join(__dirname, 'views'));
-// use ejs to render 
-app.set('view engine', 'ejs');
-
-// use res.render to load up an ejs view file
-// index page
-app.get('/', function (req, res) {
-    res.render('index');
-});
+// // look for view html in the views directory
+// app.set('views', path.join(__dirname, 'views'));
+// // use ejs to render
+// app.set('view engine', 'ejs');
+//
+// // use res.render to load up an ejs view file
+// // index page
+// app.get('/', function (req, res) {
+//     res.render('index');
+// });
 
 // setup routes
-app.use('/', index);
+// app.use('/', index);
 app.use('/tweets', tweets);
 
 
