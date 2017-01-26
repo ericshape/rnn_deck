@@ -1205,6 +1205,21 @@ let tweets = [
   }
 ];
 
+//fetch json from api
+export function fetch_json(){
+  return dispatch =>{
+    dispatch({ type: 'FETCH_API_JSON'});
+    let url = "http://aurora.cs.vt.edu:5000/tweets/tweets/9";
+    return fetch(url, {
+      mode: 'no-cors',
+      method: 'get'})
+      .then((response) => {response.json()})
+      .then(function(stories) {
+        console.log("json content", stories);})
+  }
+}
+
+
 export function getLists(quantity) {
 
   tweets.map(function (d, i) {
@@ -1216,21 +1231,6 @@ export function getLists(quantity) {
     d.star = false;
     d.highlight = false;
   });
-
-  let url = "http://localhost:5000/tweets/tweets/9";
-
-  fetch(url, {
-    mode: 'no-cors',
-    method: 'get'})
-    .then(function(response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    })
-    .then(function(data) {
-      console.log(data);
-    });
 
 
   let lists = [];
@@ -1245,6 +1245,12 @@ export function getLists(quantity) {
   });
 
   return (dispatch) => {
+
+
+    // dispatch fetch json
+    dispatch(fetch_json());
+
+
     dispatch({type: GET_LISTS, lists, tweets: tweets, isFetching: true});
     // dispatch({type: GET_LISTS_START, isFetching: false});
   };
