@@ -1,4 +1,5 @@
 import faker from 'faker';
+import fetch from 'isomorphic-fetch'
 import Immutable from 'immutable';
 // import tweets from 'tweet';
 export const GET_LISTS_START = 'GET_LISTS_START';
@@ -1205,22 +1206,99 @@ let tweets = [
   }
 ];
 
+
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
+
 //fetch json from api
 export function fetch_json(){
   return dispatch =>{
     dispatch({ type: 'FETCH_API_JSON'});
     let url = "http://aurora.cs.vt.edu:5000/tweets/tweets/9";
-    return fetch(url, {
-      mode: 'no-cors',
-      method: 'get'})
+    let url_test = "http://offline-news-api.herokuapp.com/stories";
+    return fetch(url_test,
+      // {
+      // mode: 'no-cors',
+      // method: 'get'}
+      )
+      .then(function(response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
       .then((response) => {response.json()})
       .then(function(stories) {
         console.log("json content", stories);})
   }
 }
 
+// export function getLists(x){
+//   let url = "http://offline-news-api.herokuapp.com/stories";
+//   return dispatch => {
+//     dispatch({type: 'GET_LISTS_START'});
+//     return fetch(url,
+//       // {
+//       // mode: 'no-cors',
+//       // method: 'get'}
+//       )
+//       .then(function(response) {
+//         if (response.status >= 400) {
+//           throw new Error("Bad response from server");
+//         }
+//         console.log(response);
+//         return response.json();
+//       })
+//       .then((response) => {response.json()})
+//       .then(json=>{
+//         console.log(json);
+//         dispatch({type:'GET_LISTS', tweets: json});
+//       });
+//       // .then(function(stories) {
+//       //   console.log("json content", stories);})
+//   }
+// }
 
-export function getLists(quantity) {
+
+export function getLists(x){
+  let url = "http://aurora.cs.vt.edu:5000/tweets/tweets/9";
+  let url_test = "http://offline-news-api.herokuapp.com/stories";
+  return dispatch => {
+    dispatch({type: 'GET_LISTS_START'});
+    return fetch(url,
+      {
+        mode: 'no-cors',
+        // mode: 'cors',
+        // credentials: "same-origin",
+        method: "get",
+        // body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(function(response) {
+        response.status     //=> number 100–599
+        response.statusText //=> String
+        response.headers    //=> Headers
+        response.url        //=> String
+
+        console.log(response.text());
+      }, function(error) {
+        error.message //=> String
+      });
+      // .then((response) => {response.json()})
+      // .then(json=>{
+      //   console.log(json);
+      //   dispatch({type:'GET_LISTS', tweets: json});
+      // });
+    // .then(function(stories) {
+    //   console.log("json content", stories);})
+  }
+}
+
+
+export function getLists1(quantity) {
+
+
 
   tweets.map(function (d, i) {
     d.id = i+1;
