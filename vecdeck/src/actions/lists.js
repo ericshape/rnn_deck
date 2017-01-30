@@ -1267,9 +1267,7 @@ export function getLists(x){
     dispatch({type: 'GET_LISTS_START'});
     return fetch(url,
       {
-        mode: 'no-cors',
-        // mode: 'cors',
-        // credentials: "same-origin",
+        credentials: "same-origin",
         method: "get",
         // body: JSON.stringify(data),
         headers: {
