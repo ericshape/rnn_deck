@@ -8,12 +8,31 @@ var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    }
+    else {
+        next();
+    }
+};
+
 // configure app
+
+app.use(allowCrossDomain);
+
 app.use(morgan('dev')); // log requests to the console
 
 // configure body parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
 
 // serve static assets from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
