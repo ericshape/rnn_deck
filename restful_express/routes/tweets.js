@@ -87,7 +87,8 @@ router.route('/tweets/:claim_id')
                 created_at: 1,
                 opinion: 1,
                 retweet_count: 1,
-                html_text: 1
+                text: 1,
+                entities: 1
             })
             .exec(function (err, tweets) {
                 if (err)

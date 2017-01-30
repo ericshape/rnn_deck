@@ -1260,6 +1260,16 @@ export function fetch_json(){
 // }
 
 
+export function parseJSON(response) {
+  return new Promise((resolve) => response.json()
+    .then((json) => resolve({
+      status: response.status,
+      ok: response.ok,
+      json,
+    })));
+}
+
+
 export function getLists(x){
   let url = "http://aurora.cs.vt.edu:5000/tweets/tweets/9";
   let url_test = "http://offline-news-api.herokuapp.com/stories";
@@ -1273,23 +1283,34 @@ export function getLists(x){
         headers: {
           "Content-Type": "application/json"
         }
-      }).then(function(response) {
-        response.status     //=> number 100–599
-        response.statusText //=> String
-        response.headers    //=> Headers
-        response.url        //=> String
+      })
+      .then(parseJSON)
+      .then((response) => {
+        if (response.ok) {
+          console.log(response.json);
+        }
 
-        console.log(response.text());
-      }, function(error) {
-        error.message //=> String
       });
+
+
+      // .then(function(response) {
+      //   response.status     //=> number 100–599
+      //   response.statusText //=> String
+      //   response.headers    //=> Headers
+      //   response.url        //=> String
+      //
+      //   // console.log(response.json());
+      // }, function(error) {
+      //   error.message //=> String
+      // })
       // .then((response) => {response.json()})
-      // .then(json=>{
-      //   console.log(json);
-      //   dispatch({type:'GET_LISTS', tweets: json});
+      // // .then(json=>{
+      // //   console.log(json);
+      // //   dispatch({type:'GET_LISTS', tweets: json});
+      // // });
+      // .then(function(stories) {
+      //   console.log("json content", stories);
       // });
-    // .then(function(stories) {
-    //   console.log("json content", stories);})
   }
 }
 
