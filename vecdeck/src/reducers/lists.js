@@ -30,13 +30,14 @@ export default function lists(state = initialState, action) {
     case GET_LISTS_START:
       return state.set('isFetching', true);
     case GET_LISTS:
+      console.log("in GET_LISTS Recuders");
       return state.withMutations((ctx) => {
         ctx.set('isFetching', false)
           .set('tweets', action.tweets)
           .set('lists', action.lists);
       });
     case MOVE_CARD: {
-      console.log("Reducer: MOVE_CARD")
+      console.log("Reducer: MOVE_CARD");
       const newLists = [...state.lists];
       const {lastX, lastY, nextX, nextY} = action;
       if (lastX === nextX) {
